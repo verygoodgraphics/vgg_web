@@ -1,5 +1,5 @@
 import { EventCallback, VGGWasmInstance, VggSdkType } from "./types"
-import { EventType, State } from "./constants"
+import { EventType, LoadingState, State } from "./constants"
 import { EventManager } from "./events"
 import { Observable } from "./observable"
 import { Logger } from "./logger"
@@ -12,10 +12,12 @@ export interface VGGProps {
   runtime?: string
   editMode?: boolean
   verbose?: boolean
+  disableLoader?: boolean
   onLoad?: EventCallback
   onLoadError?: EventCallback
   onStateChange?: EventCallback
   onSelect?: EventCallback
+  onLoadingStateUpdate?: (state: LoadingState) => void
 }
 
 export type VGGNode = {
@@ -36,6 +38,8 @@ export class VGG<T extends string> {
   private height: number = 0
   private editMode: boolean = false
 
+  private disableLoader = false
+
   // Verbose logging
   private verbose: boolean
 
@@ -52,6 +56,8 @@ export class VGG<T extends string> {
   private eventManager: EventManager
 
   public state: State = State.Loading
+
+  private onLoadingStateUpdate: (state: LoadingState) => void
 
   // The VGG Wasm instance
   private vggWasmInstance: VGGWasmInstance | null = null
@@ -79,6 +85,8 @@ export class VGG<T extends string> {
     this.editMode = props.editMode ?? false
     this.verbose = props.verbose ?? false
     this.logger = new Logger(this.verbose)
+    this.disableLoader = props.disableLoader ?? false
+    this.onLoadingStateUpdate = props.onLoadingStateUpdate ?? (() => {})
 
     // New event management system
     this.eventManager = new EventManager()
@@ -90,14 +98,21 @@ export class VGG<T extends string> {
 
   public async load() {
     try {
+      this.updateLoader(LoadingState.StartLoading)
       await this.init({ ...this.props })
-      // await this.getDesignDocument()
     } catch (err: any) {
       this.eventManager.fire({ type: EventType.LoadError, data: err.message })
     }
   }
 
+  private updateLoader(text: LoadingState) {
+    if (this.disableLoader) return
+    this.onLoadingStateUpdate?.(text)
+  }
+
   private async init({ src }: VGGProps) {
+    this.updateLoader(LoadingState.DownloadVGGRuntimeJS)
+
     this.src = src
     this.insertScript(this.runtime + "/vgg_runtime.js")
 
@@ -140,6 +155,8 @@ export class VGG<T extends string> {
    * @param resolve
    */
   private async checkState(resolve: (value: unknown) => void) {
+    this.updateLoader(LoadingState.CreateVGGWasmInstance)
+
     if (window._vgg_createWasmInstance) {
       const wasmInstance = await this.createVggWasmInstance()
 
@@ -204,6 +221,8 @@ export class VGG<T extends string> {
       // clear requestAnimationFrame
       cancelAnimationFrame(this.checkStateFrame)
       resolve(true)
+
+      this.updateLoader(LoadingState.VGGWasmInstanceReady)
     } else {
       this.checkStateFrame = requestAnimationFrame(() =>
         this.checkState(resolve)
@@ -252,10 +271,12 @@ export class VGG<T extends string> {
       throw new Error("VGG Wasm instance not ready")
     }
 
+    this.updateLoader(LoadingState.DownloadSourceFile)
     const res = await fetch(darumaUrl ?? this.src)
     if (!res.ok) throw new Error("Failed to fetch Daruma file")
     const buffer = await res.arrayBuffer()
     const data = new Int8Array(buffer)
+    this.updateLoader(LoadingState.LoadSourceFile)
     if (
       !this.vggWasmInstance.ccall(
         "load_file_from_mem",

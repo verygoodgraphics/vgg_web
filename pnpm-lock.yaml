@@ -15,7 +15,7 @@ importers:
   packages/react:
     dependencies:
       '@verygoodgraphics/vgg-wasm':
-        specifier: workspace:^0.0.18
+        specifier: workspace:^
         version: link:../wasm
       react:
         specifier: ^18.2.0
@@ -67,7 +67,7 @@ importers:
   packages/svelte:
     dependencies:
       '@verygoodgraphics/vgg-wasm':
-        specifier: workspace:^0.0.18
+        specifier: workspace:^
         version: link:../wasm
     devDependencies:
       '@sveltejs/adapter-auto':
@@ -131,7 +131,7 @@ importers:
   packages/vue:
     dependencies:
       '@verygoodgraphics/vgg-wasm':
-        specifier: workspace:^0.0.18
+        specifier: workspace:^
         version: link:../wasm
       vue:
         specifier: ^3.3.11

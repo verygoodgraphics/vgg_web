@@ -1,7 +1,7 @@
 {
   "name": "@verygoodgraphics/vgg-vue",
   "homepage": "https://verygoodgraphics.com/",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/verygoodgraphics/vgg_vue.git"
@@ -34,7 +34,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@verygoodgraphics/vgg-wasm": "workspace:^0.0.18",
+    "@verygoodgraphics/vgg-wasm": "workspace:^",
     "vue": "^3.3.11"
   },
   "devDependencies": {

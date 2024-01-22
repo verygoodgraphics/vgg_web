@@ -23,7 +23,7 @@ function App() {
     <div className="grid grid-cols-2">
       <div className="relative">
         <div className="absolute top-2 w-full flex justify-center item-center">
-          <h2 className="bg-violet-500 rounded-md px-2 py-1 text-white text-sm font-semibold">
+          <h2 className="bg-violet-500 rounded-md px-2 py-1 text-white text-sm font-semibold z-50">
             VGGRender Component
           </h2>
         </div>
