@@ -1,0 +1,45 @@
+{
+  "name": "@verygoodgraphics/vgg-wasm",
+  "homepage": "https://verygoodgraphics.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/verygoodgraphics/vgg_wasm.git"
+  },
+  "license": "MIT",
+  "version": "0.0.18",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vgg-wasm.cjs",
+  "module": "./dist/vgg-wasm.mjs",
+  "jsdelivr": "dist/vgg-wasm.iife.js",
+  "unpkg": "dist/vgg-wasm.iife.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/vgg-wasm.mjs",
+      "require": "./dist/vgg-wasm.cjs"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "@types/offscreencanvas": "^2019.7.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vite-plugin-dts": "^3.6.3"
+  }
+}
