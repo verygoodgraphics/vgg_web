@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-svelte
 
+## 0.1.1
+
+### Patch Changes
+
+- b781bcc: package svelte without build process
+
 ## 0.1.0
 
 ### Minor Changes
