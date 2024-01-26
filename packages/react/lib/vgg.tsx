@@ -17,6 +17,7 @@ export interface Props<T extends string>
   canvasStyle?: React.CSSProperties
   loadingMaskStyle?: React.CSSProperties
   loadingComponent?: React.ReactNode
+  customFonts?: string[]
   onLoad?: (event: VGGEvent, instance: VGG<T>) => Promise<void>
   onLoadError?: (event: VGGEvent) => Promise<void>
   onStateChange?: (event: VGGEvent, instance: VGG<T>) => Promise<void>
@@ -63,6 +64,7 @@ export function VGGRender<T extends string>(props: Props<T>) {
     verbose,
     loadingMaskStyle,
     loadingComponent,
+    customFonts,
     onLoad,
     onLoadError,
     onStateChange,
@@ -81,6 +83,7 @@ export function VGGRender<T extends string>(props: Props<T>) {
           editMode,
           verbose,
           canvas: canvasRef.current!,
+          customFonts,
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
           onLoad,

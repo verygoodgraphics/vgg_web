@@ -7,6 +7,7 @@
 	export let runtime = 'https://s5.vgg.cool/runtime/latest';
 	export let editMode = false;
 	export let verbose = false;
+	export let customFonts = [] as string[];
 	export let onLoad = async (event: VGGEvent, instance: VGG<any>) => {};
 	export let onLoadError = async (event: VGGEvent) => {};
 	export let onStateChange = async (event: VGGEvent, instance: VGG<any>) => {};
@@ -27,6 +28,7 @@
 					editMode,
 					verbose,
 					canvas: canvasElement,
+					customFonts,
 					// onLoad,
 					// onLoadError,
 					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
