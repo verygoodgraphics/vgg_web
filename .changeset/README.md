@@ -6,3 +6,21 @@ find the full documentation for it [in our repository](https://github.com/change
 
 We have a quick list of common questions to get you started engaging with this project in
 [our documentation](https://github.com/changesets/changesets/blob/main/docs/common-questions.md)
+
+```sh
+# Generate a [changeset].md file.
+pnpm changeset
+
+# Update versions.
+pnpm changeset version
+
+# Update the lockfile and rebuild packages.
+pnpm install
+
+# Commit the changes.
+git add .
+git commit -m "chore: release"
+
+# Publish the packages.
+pnpm publish -r
+```

@@ -26,7 +26,7 @@ export interface VGGEventProps<T extends string> {
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const isLoading = ref(true)
 
-const { src, runtime, editMode, verbose } = defineProps<VGGRenderProps>()
+const { src, runtime, editMode, verbose, customFonts } = defineProps<VGGRenderProps>()
 const emit = defineEmits(['onLoad', 'onLoadError', 'onStateChange', 'onSelect'])
 
 onMounted(() => {
@@ -39,6 +39,7 @@ onMounted(() => {
         editMode,
         verbose,
         canvas: canvasRef.value!,
+        customFonts,
         // onLoad: (...args) => emit('onLoad', ...args),
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error

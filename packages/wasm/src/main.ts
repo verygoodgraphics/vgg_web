@@ -15,14 +15,14 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 const vgg = new VGG({
   // src: "https://s3.vgg.cool/test/vgg.daruma",
   src: "https://verygoodgraphics.com/d/clqywc8tu002bo9mn8bctgekn",
-  runtime:
-    "https://s3.vgg.cool/test/runtime/58c4b139c59abf843cde477eb04de0dcb7b0ed82/",
+  runtime: "https://s3.vgg.cool/test/runtime/latest",
   // editMode: true,
   verbose: true,
   // disableLoader: true,
   canvas: document.querySelector("#canvas") as HTMLCanvasElement,
   onSelect: async (event) => console.log("Select", event),
   onLoadingStateUpdate: (state) => console.log("Loading State", state),
+  customFonts: ["./Roboto-Black.ttf"],
   // onLoad: async (event) => console.log("Load", event),
   // onLoadError: async (event) => console.log("Load Error", event),
   // onStateChange: async (state) => console.log("State Change", state),

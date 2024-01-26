@@ -1,5 +1,6 @@
 <script lang="ts">
-	import VGGRender, { EventType } from '../lib/index';
+	import VGGRender, { EventType } from '../../dist/index';
+	// import VGGRender, { EventType } from '../lib/index';
 </script>
 
 <main>

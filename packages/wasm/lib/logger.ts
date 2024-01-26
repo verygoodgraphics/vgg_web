@@ -17,4 +17,14 @@ export class Logger {
       )
     }
   }
+
+  public logLifeCycle(event: { phase: string; status: "start" | "end" }): void {
+    if (this.debug) {
+      console.log(
+        `%cVGGLifeCycle::${event.phase}`,
+        `background: ${Colors.Yellow5}; color: ${Colors.Yellow8}; font-weight: bold; border-radius: 2px; padding: 0 2.5px;`,
+        event.status
+      )
+    }
+  }
 }

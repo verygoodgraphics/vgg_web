@@ -13,6 +13,7 @@ export interface VGGProps {
   editMode?: boolean
   verbose?: boolean
   disableLoader?: boolean
+  customFonts?: string[]
   onLoad?: EventCallback
   onLoadError?: EventCallback
   onStateChange?: EventCallback
@@ -69,6 +70,8 @@ export class VGG<T extends string> {
   private static readonly missingErrorMessage: string =
     "Daruma source file required"
 
+  private customFonts: string[] = []
+
   private observables: Map<string, Observable> = new Map()
 
   private checkStateFrame: number = 0
@@ -82,6 +85,7 @@ export class VGG<T extends string> {
     this.runtime = props.runtime || this.defaultRuntime
     this.width = this.canvas?.width ?? 0
     this.height = this.canvas?.height ?? 0
+    this.customFonts = props.customFonts ?? []
     this.editMode = props.editMode ?? false
     this.verbose = props.verbose ?? false
     this.logger = new Logger(this.verbose)
@@ -114,7 +118,9 @@ export class VGG<T extends string> {
     this.updateLoader(LoadingState.DownloadVGGRuntimeJS)
 
     this.src = src
-    this.insertScript(this.runtime + "/vgg_runtime.js")
+
+    // load vgg_runtime.js
+    await this.loadScript(this.runtime + "/vgg_runtime.js")
 
     // check if canvas is a valid element
     if (!this.canvas) {
@@ -125,10 +131,18 @@ export class VGG<T extends string> {
       throw new Error(VGG.missingErrorMessage)
     }
 
-    return new Promise((resolve) => {
+    await new Promise((resolve) => {
       this.checkStateFrame = requestAnimationFrame(() =>
         this.checkState(resolve)
       )
+    })
+
+    // load fonts
+    await this.loadFonts()
+
+    this.logger.logLifeCycle({
+      phase: "init",
+      status: "end",
     })
   }
 
@@ -230,10 +244,39 @@ export class VGG<T extends string> {
     }
   }
 
-  private insertScript(src: string) {
+  private async loadScript(src: string) {
     const script = document.createElement("script")
     script.src = src
     document.head.appendChild(script)
+
+    return new Promise((resolve) => {
+      script.onload = () => {
+        resolve(true)
+      }
+    })
+  }
+
+  private async loadFonts() {
+    const fonts = this.customFonts
+    for (const font of fonts) {
+      await fetch(font)
+        .then((res) => {
+          if (res.ok) {
+            return res.arrayBuffer()
+          }
+          throw new Error(res.statusText)
+        })
+        .then((buf) => {
+          const data = new Uint8Array(buf)
+          const fontName = font.split("/").pop()?.split(".")[0] ?? ""
+          if (!this.vggSdk?.addFont(data, fontName)) {
+            throw new Error("add font failed!")
+          }
+        })
+        .catch((err) => {
+          console.error(`Failed to add font: ${err.message}`)
+        })
+    }
   }
 
   /**

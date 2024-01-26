@@ -94,6 +94,8 @@ export interface VggSdkType {
 
   getElement(id: string): string
   updateElement(id: string, value: string): void
+
+  addFont(font: Uint8Array, name: string): void
 }
 
 declare global {
