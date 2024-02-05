@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.3
+
+### Patch Changes
+
+- update build output
+
 ## 0.1.2
 
 ### Patch Changes
