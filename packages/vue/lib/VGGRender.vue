@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { StyleValue, ref, onMounted } from 'vue';
+import { StyleValue, ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import {
   VGG,
   State,
@@ -25,43 +25,50 @@ export interface VGGEventProps<T extends string> {
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const isLoading = ref(true)
+const vggInstance = ref<VGG<any> | null>(null)
 
 const { src, runtime, editMode, verbose, customFonts } = defineProps<VGGRenderProps>()
 const emit = defineEmits(['onLoad', 'onLoadError', 'onStateChange', 'onSelect'])
 
-onMounted(() => {
-  if (canvasRef.value) {
-    // eslint-disable-next-line no-extra-semi
+watch(() => src, (newSrc) => {
+  if (vggInstance.value && newSrc !== src) {
+    vggInstance.value = init(newSrc)
+  }
+})
+
+function init(src: string | Int8Array) {
+  const vggInstance = new VGG({
+    src: src ?? "https://s3.vgg.cool/test/vgg.daruma",
+    runtime: runtime ?? "https://s5.vgg.cool/runtime/latest",
+    editMode,
+    verbose,
+    canvas: canvasRef.value!,
+    customFonts,
+    // onLoad: (...args) => emit('onLoad', ...args),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    onLoadError: (...args) => emit('onLoadError', ...args),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    onStateChange: (...args) => emit('onStateChange', ...args),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    onSelect: (...args) => emit('onSelect', ...args)
+  })
+
     ; (async () => {
-      const vgg = new VGG({
-        src: src ?? "https://s3.vgg.cool/test/vgg.daruma",
-        runtime: runtime ?? "https://s5.vgg.cool/runtime/latest",
-        editMode,
-        verbose,
-        canvas: canvasRef.value!,
-        customFonts,
-        // onLoad: (...args) => emit('onLoad', ...args),
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        onLoadError: (...args) => emit('onLoadError', ...args),
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        onStateChange: (...args) => emit('onStateChange', ...args),
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        onSelect: (...args) => emit('onSelect', ...args)
-      })
+      if (!vggInstance) return
 
-      await vgg.load()
+      await vggInstance.load()
 
-      if (vgg.state === State.Ready) {
-        await vgg.render()
+      if (vggInstance.state === State.Ready) {
+        await vggInstance.render()
         emit('onLoad',
           {
             type: EventType.Load,
             data: "",
           },
-          vgg
+          vggInstance
         )
       } else {
         emit('onLoadError', {
@@ -72,6 +79,19 @@ onMounted(() => {
 
       isLoading.value = false
     })()
+
+  return vggInstance
+}
+
+onMounted(() => {
+  if (canvasRef.value) {
+    vggInstance.value = init(src)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (vggInstance.value) {
+    vggInstance.value.destroy()
   }
 })
 </script>

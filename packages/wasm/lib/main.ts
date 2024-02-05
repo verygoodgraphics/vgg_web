@@ -368,6 +368,11 @@ export class VGG<T extends string> {
 
     return isExist
   }
+
+  public destroy() {
+    this.eventManager.removeAll()
+    this.vggWasmInstance = null
+  }
 }
 
 if (typeof globalThis !== "undefined") {

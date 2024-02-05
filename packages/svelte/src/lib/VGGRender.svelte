@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { VGG, State, type VGGProps, type VGGEvent, EventType } from '@verygoodgraphics/vgg-wasm';
+	import { onDestroy } from 'svelte';
+	import { VGG, State, type VGGEvent, EventType } from '@verygoodgraphics/vgg-wasm';
 
 	export let canvasStyle = '';
 	export let src = '';
@@ -18,45 +18,56 @@
 	let canvasElement: HTMLCanvasElement;
 	let isLoading = true;
 
-	onMount(() => {
-		if (canvasElement) {
-			// eslint-disable-next-line no-extra-semi
-			(async () => {
-				const vgg = new VGG({
-					src: src ?? 'https://s3.vgg.cool/test/vgg.daruma',
-					runtime: runtime ?? 'https://s5.vgg.cool/runtime/latest',
-					editMode,
-					verbose,
-					canvas: canvasElement,
-					customFonts,
-					// onLoad,
-					// onLoadError,
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					// @ts-expect-error
-					onStateChange,
-					onSelect
-				});
+	const init = function init(src: string | Int8Array) {
+		if (!src || !canvasElement) {
+			return;
+		}
 
-				await vgg.load();
+		const vggInstance = new VGG({
+			src: src ?? 'https://s3.vgg.cool/test/vgg.daruma',
+			runtime: runtime ?? 'https://s5.vgg.cool/runtime/latest',
+			editMode,
+			verbose,
+			canvas: canvasElement,
+			customFonts,
+			// onLoad,
+			// onLoadError,
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-expect-error
+			onStateChange,
+			onSelect
+		});
 
-				if (vgg.state === State.Ready) {
-					await vgg.render();
-					onLoad(
-						{
-							type: EventType.Load,
-							data: ''
-						},
-						vgg
-					);
-				} else {
-					onLoadError({
-						type: EventType.LoadError,
+		(async () => {
+			await vggInstance.load();
+
+			if (vggInstance.state === State.Ready) {
+				await vggInstance.render();
+				onLoad(
+					{
+						type: EventType.Load,
 						data: ''
-					});
-				}
+					},
+					vggInstance
+				);
+			} else {
+				onLoadError({
+					type: EventType.LoadError,
+					data: ''
+				});
+			}
 
-				isLoading = false;
-			})();
+			isLoading = false;
+		})();
+
+		return vggInstance;
+	};
+
+	$: vgg = init(src);
+
+	onDestroy(() => {
+		if (vgg) {
+			vgg.destroy();
 		}
 	});
 </script>
