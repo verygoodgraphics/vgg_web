@@ -1,7 +1,7 @@
 {
   "name": "@verygoodgraphics/vgg-vue",
   "homepage": "https://verygoodgraphics.com/",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/verygoodgraphics/vgg_vue.git"
