@@ -21,6 +21,9 @@ pnpm install
 git add .
 git commit -m "chore: release"
 
+# Build the packages.
+pnpm build
+
 # Publish the packages.
 pnpm publish -r
 ```
