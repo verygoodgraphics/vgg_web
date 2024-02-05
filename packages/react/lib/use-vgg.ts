@@ -10,7 +10,7 @@ export function useVGG(options: Options) {
   const [state, setState] = useState(State.Loading)
 
   useEffect(() => {
-    if (canvasRef.current) {
+    if (src && canvasRef.current) {
       // eslint-disable-next-line no-extra-semi
       ;(async () => {
         vgg.current = new VGG({
@@ -30,7 +30,13 @@ export function useVGG(options: Options) {
         }
       })()
     }
-  }, [])
+
+    return () => {
+      if (vgg.current) {
+        vgg.current.destroy()
+      }
+    }
+  }, [src])
 
   return {
     canvasRef,

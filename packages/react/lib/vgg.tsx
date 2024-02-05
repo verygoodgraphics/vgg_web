@@ -72,12 +72,13 @@ export function VGGRender<T extends string>(props: Props<T>) {
   } = props
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isLoading, setLoading] = useState(true)
+  const vggInstanceCache = useRef<VGG<T> | null>(null)
 
   useEffect(() => {
-    if (canvasRef.current) {
+    if (src && canvasRef.current) {
       // eslint-disable-next-line no-extra-semi
       ;(async () => {
-        const vgg = new VGG({
+        vggInstanceCache.current = new VGG({
           src: src ?? "https://s3.vgg.cool/test/vgg.daruma",
           runtime: runtime ?? "https://s5.vgg.cool/runtime/latest",
           editMode,
@@ -94,16 +95,16 @@ export function VGGRender<T extends string>(props: Props<T>) {
           onSelect,
         })
 
-        await vgg.load()
+        await vggInstanceCache.current.load()
 
-        if (vgg.state === State.Ready) {
-          await vgg.render()
+        if (vggInstanceCache.current.state === State.Ready) {
+          await vggInstanceCache.current.render()
           onLoad?.(
             {
               type: EventType.Load,
               data: "",
             },
-            vgg
+            vggInstanceCache.current
           )
         } else {
           onLoadError?.({
@@ -115,7 +116,13 @@ export function VGGRender<T extends string>(props: Props<T>) {
         setLoading(false)
       })()
     }
-  }, [])
+
+    return () => {
+      if (vggInstanceCache.current) {
+        vggInstanceCache.current.destroy()
+      }
+    }
+  }, [src])
 
   return (
     <div className={className} style={{ position: "relative" }}>

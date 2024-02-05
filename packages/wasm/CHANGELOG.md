@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.5
+
+### Patch Changes
+
+- support source reload
+
 ## 0.1.4
 
 ### Patch Changes
