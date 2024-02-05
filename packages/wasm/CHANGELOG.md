@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.4
+
+### Patch Changes
+
+- update type definition
+
 ## 0.1.3
 
 ### Patch Changes
