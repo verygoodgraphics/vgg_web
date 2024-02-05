@@ -45,7 +45,7 @@ export class VGG<T extends string> {
   private verbose: boolean
 
   // A url to a Daruma file
-  private src: string
+  private src: string | Int8Array
 
   // The Wasm runtime
   private runtime: string
@@ -119,8 +119,17 @@ export class VGG<T extends string> {
 
     this.src = src
 
-    // load vgg_runtime.js
-    await this.loadScript(this.runtime + "/vgg_runtime.js")
+    {
+      // check if the vgg_runtime.js is already loaded
+      const isRuntimeScriptExist = Array.from(document.scripts).some((script) =>
+        script.src.includes("vgg_runtime.js")
+      )
+
+      if (!isRuntimeScriptExist) {
+        // load vgg_runtime.js
+        await this.loadScript(this.runtime + "/vgg_runtime.js")
+      }
+    }
 
     // check if canvas is a valid element
     if (!this.canvas) {
@@ -314,18 +323,30 @@ export class VGG<T extends string> {
       throw new Error("VGG Wasm instance not ready")
     }
 
-    this.updateLoader(LoadingState.DownloadSourceFile)
-    const res = await fetch(darumaUrl ?? this.src)
-    if (!res.ok) throw new Error("Failed to fetch Daruma file")
-    const buffer = await res.arrayBuffer()
-    const data = new Int8Array(buffer)
+    const source = darumaUrl ?? this.src
+    let buffer: Int8Array
+
+    // check if source is a valid url or an Int8Array buffer
+    if (typeof source === "string" && source.startsWith("http")) {
+      this.updateLoader(LoadingState.DownloadSourceFile)
+      const res = await fetch(source)
+      if (!res.ok) throw new Error("Failed to fetch Daruma file")
+      const arrayBuffer = await res.arrayBuffer()
+      buffer = new Int8Array(arrayBuffer)
+    } else if (source instanceof Int8Array) {
+      buffer = source
+    } else {
+      throw new Error("Invalid source file")
+    }
+
     this.updateLoader(LoadingState.LoadSourceFile)
+
     if (
       !this.vggWasmInstance.ccall(
         "load_file_from_mem",
         "boolean", // return type
         ["string", "array", "number"], // argument types
-        ["name", data, data.length]
+        ["name", buffer, buffer.length]
       )
     ) {
       throw new Error("Failed to load Daruma file")
