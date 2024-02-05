@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.6
+
+### Patch Changes
+
+- add \_vgg_createWasmInstance validator
+
 ## 0.1.5
 
 ### Patch Changes
