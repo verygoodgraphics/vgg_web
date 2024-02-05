@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-svelte
 
+## 0.1.3
+
+### Patch Changes
+
+- support int8array source
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.2
+
 ## 0.1.2
 
 ### Patch Changes
