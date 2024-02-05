@@ -8,7 +8,7 @@ export type { VGGEvent } from "./types"
 
 export interface VGGProps {
   canvas: HTMLCanvasElement | OffscreenCanvas
-  src: string
+  src: string | Int8Array
   runtime?: string
   editMode?: boolean
   verbose?: boolean
