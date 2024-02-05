@@ -129,6 +129,16 @@ export class VGG<T extends string> {
         // load vgg_runtime.js
         await this.loadScript(this.runtime + "/vgg_runtime.js")
       }
+
+      // check if the vgg_runtime.js is already loaded
+      await new Promise((resolve) => {
+        const interval = setInterval(() => {
+          if (window._vgg_createWasmInstance) {
+            clearInterval(interval)
+            resolve(true)
+          }
+        }, 100)
+      })
     }
 
     // check if canvas is a valid element

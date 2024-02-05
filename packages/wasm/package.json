@@ -6,7 +6,7 @@
     "url": "https://github.com/verygoodgraphics/vgg_wasm.git"
   },
   "license": "MIT",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "files": [
     "dist"
   ],
