@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-vue
 
+## 0.1.7
+
+### Patch Changes
+
+- add timeout guard for creating vgg instance
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.7
+
 ## 0.1.6
 
 ### Patch Changes

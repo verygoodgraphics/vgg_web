@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.7
+
+### Patch Changes
+
+- add timeout guard for creating vgg instance
+
 ## 0.1.6
 
 ### Patch Changes
