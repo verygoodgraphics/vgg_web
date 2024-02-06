@@ -220,10 +220,10 @@ export class VGG<T extends string> {
           console.error(err)
         }
 
-        // Bind the VGG SDK
+        // bind the VGG SDK
         this.vggSdk = new wasmInstance.VggSdk()
 
-        // Mount the wasmInstance to GlobalThis
+        // mount the wasmInstance to GlobalThis
         const globalVggInstances = globalThis["vggInstances"] ?? {}
         this.vggInstanceKey = this.vggSdk.getEnv()
 

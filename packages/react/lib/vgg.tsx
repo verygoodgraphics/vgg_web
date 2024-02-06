@@ -73,13 +73,14 @@ export function VGGRender<T extends string>(props: Props<T>) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isLoading, setLoading] = useState(true)
   const vggInstanceCache = useRef<VGG<T> | null>(null)
-  const isDestroyed = useRef(false)
 
   useEffect(() => {
     if (src && canvasRef.current) {
       // eslint-disable-next-line no-extra-semi
       ;(async () => {
-        isDestroyed.current = false
+        if (vggInstanceCache.current) {
+          vggInstanceCache.current.destroy()
+        }
 
         vggInstanceCache.current = new VGG({
           src: src ?? "https://s3.vgg.cool/test/vgg.daruma",
@@ -95,12 +96,6 @@ export function VGGRender<T extends string>(props: Props<T>) {
           onStateChange,
           onSelect,
         })
-
-        if (isDestroyed.current) {
-          vggInstanceCache.current.destroy()
-          isDestroyed.current = false
-          return
-        }
 
         await vggInstanceCache.current.load()
 
@@ -128,7 +123,6 @@ export function VGGRender<T extends string>(props: Props<T>) {
       if (vggInstanceCache.current) {
         vggInstanceCache.current.destroy()
       }
-      isDestroyed.current = true
     }
   }, [src])
 
