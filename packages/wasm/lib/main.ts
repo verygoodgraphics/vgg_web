@@ -398,8 +398,11 @@ export class VGG<T extends string> {
   }
 
   public destroy() {
+    this.vggWasmInstance?._cancelMainLoop()
+
     const globalVggInstances = globalThis["vggInstances"] ?? {}
     delete globalVggInstances[this.vggInstanceKey]
+
     this.eventManager.removeAll()
     this.vggWasmInstance = null
   }
