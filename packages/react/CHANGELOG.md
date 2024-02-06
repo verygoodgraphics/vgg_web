@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-react
 
+## 0.1.9
+
+### Patch Changes
+
+- destroy instance in async process
+
 ## 0.1.8
 
 ### Patch Changes
