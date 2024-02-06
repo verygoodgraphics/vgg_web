@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-react
 
+## 0.1.10
+
+### Patch Changes
+
+- update destroy state
+
 ## 0.1.9
 
 ### Patch Changes
