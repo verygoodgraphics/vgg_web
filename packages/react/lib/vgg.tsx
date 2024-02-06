@@ -79,6 +79,8 @@ export function VGGRender<T extends string>(props: Props<T>) {
     if (src && canvasRef.current) {
       // eslint-disable-next-line no-extra-semi
       ;(async () => {
+        isDestroyed.current = false
+
         vggInstanceCache.current = new VGG({
           src: src ?? "https://s3.vgg.cool/test/vgg.daruma",
           runtime: runtime ?? "https://s5.vgg.cool/runtime/latest",
@@ -86,10 +88,8 @@ export function VGGRender<T extends string>(props: Props<T>) {
           verbose,
           canvas: canvasRef.current!,
           customFonts,
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
-          onLoad,
-          onLoadError,
+          // onLoad,
+          // onLoadError,
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
           onStateChange,

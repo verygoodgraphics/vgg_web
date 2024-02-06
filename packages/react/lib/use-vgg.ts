@@ -14,6 +14,8 @@ export function useVGG(options: Options) {
     if (src && canvasRef.current) {
       // eslint-disable-next-line no-extra-semi
       ;(async () => {
+        isDestroyed.current = false
+
         vgg.current = new VGG({
           src: src,
           runtime: runtime ?? "https://s5.vgg.cool/runtime/latest",
