@@ -169,18 +169,30 @@ export class VGG<T extends string> {
    * Create the VGG Wasm instance
    * @returns VGGWasmInstance
    */
-  private async createVggWasmInstance(): Promise<VGGWasmInstance> {
+  private async createVggWasmInstance(): Promise<VGGWasmInstance | null> {
     const runtime = this.runtime
-    return await window._vgg_createWasmInstance({
-      noInitialRun: true,
-      canvas: this.canvas,
-      locateFile: function (path: string, prefix: string) {
-        if (path.endsWith(".data")) {
-          return runtime + "/" + path
-        }
-        return prefix + path
-      },
-    })
+    try {
+      const timer = setTimeout(() => {
+        throw new Error("VGG Wasm instance creation timeout")
+      }, 1000 * 30)
+
+      const instance = await window._vgg_createWasmInstance({
+        noInitialRun: true,
+        canvas: this.canvas,
+        locateFile: function (path: string, prefix: string) {
+          if (path.endsWith(".data")) {
+            return runtime + "/" + path
+          }
+          return prefix + path
+        },
+      })
+
+      clearTimeout(timer)
+      return instance
+    } catch (err) {
+      // console.error(err)
+      return null
+    }
   }
 
   /**
