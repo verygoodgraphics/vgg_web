@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.8
+
+### Patch Changes
+
+- free up memory for new instance
+
 ## 0.1.7
 
 ### Patch Changes
