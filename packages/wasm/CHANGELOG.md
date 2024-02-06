@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.9
+
+### Patch Changes
+
+- add cancelMainLoop api
+
 ## 0.1.8
 
 ### Patch Changes
