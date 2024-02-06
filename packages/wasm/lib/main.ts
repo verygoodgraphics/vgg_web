@@ -363,14 +363,20 @@ export class VGG<T extends string> {
 
     this.updateLoader(LoadingState.LoadSourceFile)
 
-    if (
-      !this.vggWasmInstance.ccall(
-        "load_file_from_mem",
-        "boolean", // return type
-        ["string", "array", "number"], // argument types
-        ["name", buffer, buffer.length]
-      )
-    ) {
+    if (!this.vggWasmInstance) {
+      // this might happen when the user destroys the VGG instance before calling render
+      return
+    }
+
+    // load the daruma file
+    const isLoaded = this.vggWasmInstance.ccall(
+      "load_file_from_mem",
+      "boolean", // return type
+      ["string", "array", "number"], // argument types
+      ["name", buffer, buffer.length]
+    )
+
+    if (!isLoaded) {
       throw new Error("Failed to load Daruma file")
     }
   }
@@ -392,6 +398,8 @@ export class VGG<T extends string> {
   }
 
   public destroy() {
+    const globalVggInstances = globalThis["vggInstances"] ?? {}
+    delete globalVggInstances[this.vggInstanceKey]
     this.eventManager.removeAll()
     this.vggWasmInstance = null
   }
