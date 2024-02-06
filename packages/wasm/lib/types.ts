@@ -41,7 +41,7 @@ export interface VGGWasmInstance {
   VggSdk: {
     new (): VggSdkType
   }
-  _cancelMainLoop: () => void
+  _vggExit: () => void
 }
 
 /**
