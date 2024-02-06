@@ -22,6 +22,7 @@ export function useVGG(options: Options) {
         })
 
         if (isDestroyed.current) {
+          vgg.current.destroy()
           isDestroyed.current = false
           return
         }
