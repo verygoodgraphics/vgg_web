@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-vue
 
+## 0.1.8
+
+### Patch Changes
+
+- free up memory for new instance
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.8
+
 ## 0.1.7
 
 ### Patch Changes
