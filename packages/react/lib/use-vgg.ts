@@ -8,13 +8,14 @@ export function useVGG(options: Options) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const vgg = useRef<VGG<string> | null>(null)
   const [state, setState] = useState(State.Loading)
-  const isDestroyed = useRef(false)
 
   useEffect(() => {
     if (src && canvasRef.current) {
       // eslint-disable-next-line no-extra-semi
       ;(async () => {
-        isDestroyed.current = false
+        if (vgg.current) {
+          vgg.current.destroy()
+        }
 
         vgg.current = new VGG({
           src: src,
@@ -22,12 +23,6 @@ export function useVGG(options: Options) {
           canvas: canvasRef.current!,
           ...restOpts,
         })
-
-        if (isDestroyed.current) {
-          vgg.current.destroy()
-          isDestroyed.current = false
-          return
-        }
 
         await vgg.current.load()
 
@@ -44,7 +39,6 @@ export function useVGG(options: Options) {
       if (vgg.current) {
         vgg.current.destroy()
       }
-      isDestroyed.current = true
     }
   }, [src])
 
