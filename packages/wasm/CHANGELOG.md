@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.11
+
+### Patch Changes
+
+- 13fc50a: cleanup unused memory after dropping instance
+
 ## 0.1.10
 
 ### Patch Changes
