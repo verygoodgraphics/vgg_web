@@ -407,6 +407,17 @@ export class VGG<T extends string> {
 
     this.eventManager.removeAll()
     this.vggWasmInstance = null
+    this.src = ""
+    this.vggSdk = null
+
+    this.logger.logLifeCycle({
+      phase: "destroy",
+      status: "end",
+    })
+
+    this.observables.clear()
+
+    return this
   }
 }
 
