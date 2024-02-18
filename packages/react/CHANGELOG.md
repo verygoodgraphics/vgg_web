@@ -1,5 +1,12 @@
 # @verygoodgraphics/vgg-react
 
+## 0.1.14
+
+### Patch Changes
+
+- Updated dependencies [13fc50a]
+  - @verygoodgraphics/vgg-wasm@0.1.11
+
 ## 0.1.13
 
 ### Patch Changes
