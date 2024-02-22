@@ -51,3 +51,7 @@ More examples can be found in the [Examples](https://docs.verygoodgraphics.com/e
 ## Issues
 
 Have an issue with using the runtime, or want to suggest a feature/API to help make your development life better? Log an issue in our [issues](https://github.com/verygoodgraphics/vgg_web/issues) tab! You can also browse older issues and discussion threads there to see solutions that may have worked for common problems.
+
+## License
+
+VGG Web is MIT licensed.
