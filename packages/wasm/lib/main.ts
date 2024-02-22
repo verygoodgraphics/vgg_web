@@ -4,7 +4,7 @@ import { EventManager } from "./events"
 import { Observable } from "./observable"
 import { Logger } from "./logger"
 export { EventType, State } from "./constants"
-export type { VGGEvent } from "./types"
+export type { VGGEvent, EventCallback } from "./types"
 
 export interface VGGProps {
   canvas: HTMLCanvasElement | OffscreenCanvas
@@ -17,6 +17,7 @@ export interface VGGProps {
   onLoad?: EventCallback
   onLoadError?: EventCallback
   onStateChange?: EventCallback
+  onRendered?: EventCallback
   onSelect?: EventCallback
   onLoadingStateUpdate?: (state: LoadingState) => void
 }
@@ -96,6 +97,7 @@ export class VGG<T extends string> {
     this.eventManager = new EventManager()
     if (props.onLoad) this.on(EventType.Load, props.onLoad)
     if (props.onLoadError) this.on(EventType.LoadError, props.onLoadError)
+    if (props.onRendered) this.on(EventType.FirstRender, props.onRendered)
     if (props.onStateChange) this.on(EventType.StateChange, props.onStateChange)
     if (props.onSelect) this.on(EventType.Click, props.onSelect)
   }
@@ -233,17 +235,21 @@ export class VGG<T extends string> {
             [this.vggInstanceKey]: {
               instance: wasmInstance,
               listener: (event: any) => {
-                const parsedEvent = JSON.parse(event)
-                this.logger.logEvent(parsedEvent)
+                try {
+                  const parsedEvent = JSON.parse(event)
+                  this.logger.logEvent(parsedEvent)
 
-                if (parsedEvent.type === "select") {
-                  this.eventManager.fire({
-                    type: EventType.Click,
-                    data: parsedEvent,
-                  })
-                } else if (event.type === "firstRender") {
-                  this.state = State.Ready
-                  this.eventManager.fire({ type: EventType.Load })
+                  if (parsedEvent.type === "select") {
+                    this.eventManager.fire({
+                      type: EventType.Click,
+                      data: parsedEvent,
+                    })
+                  } else if (parsedEvent.type === "firstRender") {
+                    this.state = State.Rendered
+                    this.eventManager.fire({ type: EventType.FirstRender })
+                  }
+                } catch (err) {
+                  console.error(err)
                 }
               },
             },
@@ -254,9 +260,15 @@ export class VGG<T extends string> {
               instance: wasmInstance,
               listeners: new Map(), // Here we store the client's listeners, which will be mapped to the uniqueId and consumed in wasmInstance.
               listener: (event: any) => {
-                if (event.type === "firstRender") {
-                  this.state = State.Ready
-                  this.eventManager.fire({ type: EventType.Load })
+                try {
+                  const parsedEvent = JSON.parse(event)
+
+                  if (parsedEvent.type === "firstRender") {
+                    this.state = State.Rendered
+                    this.eventManager.fire({ type: EventType.FirstRender })
+                  }
+                } catch (err) {
+                  console.error(err)
                 }
               },
             },
@@ -264,6 +276,9 @@ export class VGG<T extends string> {
         }
 
         globalThis["vggInstances"] = globalVggInstances
+
+        this.state = State.Ready
+        this.eventManager.fire({ type: EventType.Load })
       } else {
         this.state = State.Error
         this.eventManager.fire({ type: EventType.LoadError })
@@ -415,6 +430,7 @@ export class VGG<T extends string> {
     this.vggWasmInstance = null
     this.src = ""
     this.vggSdk = null
+    this.state = State.Destroyed
 
     this.logger.logLifeCycle({
       phase: "destroy",
