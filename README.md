@@ -1,6 +1,6 @@
 # VGG Web
 
-![VGG hero image](https://docs.verygoodgraphics.com/img/vgg_docs_bg.jpg)
+![VGG hero image](https://raw.githubusercontent.com/verygoodgraphics/vgg_web/resources/assets/imgs/vgg_web_container.jpg)
 
 A JavaScript/TypeScript/React/Vue/Svelte and Web Assembly ([WASM](https://developer.mozilla.org/en-US/docs/WebAssembly)) runtime library for [VGG](https://vgg.cool).
 
