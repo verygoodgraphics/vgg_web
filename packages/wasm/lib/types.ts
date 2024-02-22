@@ -13,7 +13,7 @@ export type VGGEventCallback = (
 
 export type EventCallback = (
   event: VGGEvent,
-  handlers: CallbackHandlers
+  handlers?: CallbackHandlers
 ) => Promise<void>
 
 export type CurriedCallback = (handlers: CallbackHandlers) => Promise<void>

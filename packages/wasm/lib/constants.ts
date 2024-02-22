@@ -3,6 +3,7 @@
  */
 export enum EventType {
   Load = "load",
+  FirstRender = "firstrender",
   LoadError = "loaderror",
   StateChange = "statechange",
   Click = "click",
@@ -11,7 +12,9 @@ export enum EventType {
 export enum State {
   Loading = "loading",
   Ready = "ready",
+  Rendered = "rendered",
   Error = "error",
+  Destroyed = "destroyed",
 }
 
 export enum LoadingState {

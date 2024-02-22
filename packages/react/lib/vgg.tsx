@@ -5,6 +5,7 @@ import {
   State,
   type VGGProps,
   type VGGEvent,
+  type EventCallback,
   EventType,
 } from "@verygoodgraphics/vgg-wasm"
 
@@ -20,8 +21,8 @@ export interface Props<T extends string>
   customFonts?: string[]
   onLoad?: (event: VGGEvent, instance: VGG<T>) => Promise<void>
   onLoadError?: (event: VGGEvent) => Promise<void>
-  onStateChange?: (event: VGGEvent, instance: VGG<T>) => Promise<void>
-  onSelect?: (event: VGGEvent) => Promise<void>
+  onStateChange?: EventCallback
+  onSelect?: EventCallback
 }
 
 export function VGGRender<T extends string>(props: Props<T>) {
@@ -39,6 +40,7 @@ export function VGGRender<T extends string>(props: Props<T>) {
     onLoadError,
     onStateChange,
     onSelect,
+    onRendered,
   } = props
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isLoading, setLoading] = useState(true)
@@ -59,12 +61,15 @@ export function VGGRender<T extends string>(props: Props<T>) {
           verbose,
           canvas: canvasRef.current!,
           customFonts,
-          // onLoad,
-          // onLoadError,
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
           onStateChange,
           onSelect,
+          onRendered: async () => {
+            setLoading(false)
+            onRendered?.({
+              type: EventType.FirstRender,
+              data: "",
+            })
+          },
         })
 
         await vggInstanceCache.current.load()
@@ -84,8 +89,6 @@ export function VGGRender<T extends string>(props: Props<T>) {
             data: "",
           })
         }
-
-        setLoading(false)
       })()
     }
 

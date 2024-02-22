@@ -7,17 +7,17 @@ import { VGGRender } from "../lib/vgg"
 import "./App.css"
 
 function App() {
-  const { canvasRef, vgg, isLoading } = useVGG({
+  const { canvasRef, vgg, isRendered } = useVGG({
     src: "https://s3.vgg.cool/test/vgg.daruma",
     runtime: "https://s3.vgg.cool/test/runtime/latest",
   })
 
   useEffect(() => {
-    if (isLoading || !vgg.current) return
+    if (!isRendered || !vgg.current) return
     vgg.current?.$("#vgg-btn-get-started").on(EventType.Click, async () => {
       window.alert("Hello World from useVGG hook!")
     })
-  }, [isLoading])
+  }, [isRendered])
 
   return (
     <div className="grid grid-cols-2">

@@ -1,10 +1,15 @@
-import { State, VGG, type VGGProps } from "@verygoodgraphics/vgg-wasm"
+import {
+  EventType,
+  State,
+  VGG,
+  type VGGProps,
+} from "@verygoodgraphics/vgg-wasm"
 import { useEffect, useRef, useState } from "react"
 
 export interface Options extends Omit<VGGProps, "canvas"> {}
 
 export function useVGG(options: Options) {
-  const { src, runtime, ...restOpts } = options
+  const { src, runtime, onRendered, ...restOpts } = options
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const vgg = useRef<VGG<string> | null>(null)
   const [state, setState] = useState(State.Loading)
@@ -21,6 +26,13 @@ export function useVGG(options: Options) {
           src: src,
           runtime: runtime ?? "https://s5.vgg.cool/runtime/latest",
           canvas: canvasRef.current!,
+          onRendered: async () => {
+            setState(State.Rendered)
+            onRendered?.({
+              type: EventType.FirstRender,
+              data: "",
+            })
+          },
           ...restOpts,
         })
 
@@ -46,6 +58,7 @@ export function useVGG(options: Options) {
     canvasRef,
     vgg,
     isLoading: state === State.Loading,
+    isRendered: state === State.Rendered,
     state,
   }
 }
