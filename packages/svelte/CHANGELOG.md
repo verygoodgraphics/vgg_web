@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-svelte
 
+## 0.1.14
+
+### Patch Changes
+
+- add rendered state
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.13
+
 ## 0.1.13
 
 ### Patch Changes
