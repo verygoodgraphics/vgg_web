@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-react
 
+## 0.1.15
+
+### Patch Changes
+
+- add firstRender listener
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.12
+
 ## 0.1.14
 
 ### Patch Changes
