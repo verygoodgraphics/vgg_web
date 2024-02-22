@@ -241,6 +241,9 @@ export class VGG<T extends string> {
                     type: EventType.Click,
                     data: parsedEvent,
                   })
+                } else if (event.type === "firstRender") {
+                  this.state = State.Ready
+                  this.eventManager.fire({ type: EventType.Load })
                 }
               },
             },
@@ -250,14 +253,17 @@ export class VGG<T extends string> {
             [this.vggInstanceKey]: {
               instance: wasmInstance,
               listeners: new Map(), // Here we store the client's listeners, which will be mapped to the uniqueId and consumed in wasmInstance.
+              listener: (event: any) => {
+                if (event.type === "firstRender") {
+                  this.state = State.Ready
+                  this.eventManager.fire({ type: EventType.Load })
+                }
+              },
             },
           })
         }
 
         globalThis["vggInstances"] = globalVggInstances
-
-        this.state = State.Ready
-        this.eventManager.fire({ type: EventType.Load })
       } else {
         this.state = State.Error
         this.eventManager.fire({ type: EventType.LoadError })
