@@ -2,7 +2,7 @@
 
 ![VGG hero image](https://raw.githubusercontent.com/verygoodgraphics/vgg_web/resources/assets/imgs/vgg_web_container.jpg)
 
-A JavaScript/TypeScript/React/Vue/Svelte and Web Assembly ([WASM](https://developer.mozilla.org/en-US/docs/WebAssembly)) runtime library for [VGG](https://vgg.cool).
+A JavaScript/TypeScript/React/Vue/Svelte and Web Assembly ([WASM](https://developer.mozilla.org/en-US/docs/WebAssembly)) runtime library for [VGG](https://verygoodgraphics.com/).
 
 This library allows full control over Daruma files with a high-level API for hooking up many simple interactions, as well as a low-level API that allows you to drive your own render loop to create multiple artboards all in one canvas.
 
@@ -16,9 +16,9 @@ This library allows full control over Daruma files with a high-level API for hoo
 
 ## VGG Overview
 
-[VGG](https://vgg.cool) is the next-gen vector graphics and its toolkit for cross-platform UI development which is compatible with any framework and any platform..
+[VeryGoodGraphics (VGG)](https://verygoodgraphics.com/) is the next-gen vector graphics and its toolkit for cross-platform UI development which is compatible with any framework and any platform..
 
-:house_with_garden: [Homepage](https://vgg.cool/)
+:house_with_garden: [Homepage](https://verygoodgraphics.com//)
 
 :blue_book: [Documentation](https://docs.verygoodgraphics.com/)
 
