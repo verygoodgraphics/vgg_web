@@ -1,12 +1,11 @@
-import { EventType } from "./constants"
-import { VGGEventListener, VGGEvent } from "./types"
+import type { VGGEventListener, VGGEvent, VGGEventType } from "./types"
 
 // Manages VGG events and listeners
 export class EventManager {
   constructor(private listeners: VGGEventListener[] = []) {}
 
   // Gets listeners of specified type
-  private getListeners(type: EventType): VGGEventListener[] {
+  private getListeners(type: VGGEventType): VGGEventListener[] {
     return this.listeners.filter((e) => e.type === type)
   }
 
@@ -42,7 +41,7 @@ export class EventManager {
    * @param type the type of listeners to clear, or all listeners if not
    * specified
    */
-  public removeAll(type?: EventType) {
+  public removeAll(type?: VGGEventType) {
     if (!type) {
       this.listeners.splice(0, this.listeners.length)
     } else {

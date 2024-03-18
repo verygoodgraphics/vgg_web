@@ -14,9 +14,10 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 
 const vgg = new VGG({
   // src: "https://s3.vgg.cool/test/vgg.daruma",
-  src: "https://verygoodgraphics.com/d/clqywc8tu002bo9mn8bctgekn",
+  // src: "https://verygoodgraphics.com/d/clqywc8tu002bo9mn8bctgekn",
+  src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/feature/geometry/geometry__transform__rotation.daruma",
   runtime: "https://s3.vgg.cool/test/runtime/latest",
-  // editMode: true,
+  editMode: true,
   verbose: true,
   // disableLoader: true,
   canvas: document.querySelector("#canvas") as HTMLCanvasElement,

@@ -6,7 +6,6 @@ import {
   type VGGProps,
   type VGGEvent,
   type EventCallback,
-  EventType,
 } from "@verygoodgraphics/vgg-wasm"
 
 export interface Props<T extends string>
@@ -51,11 +50,12 @@ export function VGGRender<T extends string>(props: Props<T>) {
       // eslint-disable-next-line no-extra-semi
       ;(async () => {
         if (vggInstanceCache.current) {
-          vggInstanceCache.current.destroy()
+          vggInstanceCache.current.render(src)
+          return
         }
 
         vggInstanceCache.current = new VGG({
-          src: src ?? "https://s3.vgg.cool/test/vgg.daruma",
+          src: src,
           runtime: runtime ?? "https://s5.vgg.cool/runtime/latest",
           editMode,
           verbose,
@@ -66,7 +66,7 @@ export function VGGRender<T extends string>(props: Props<T>) {
           onRendered: async () => {
             setLoading(false)
             onRendered?.({
-              type: EventType.FirstRender,
+              type: "firstrender",
               data: "",
             })
           },
@@ -78,14 +78,14 @@ export function VGGRender<T extends string>(props: Props<T>) {
           await vggInstanceCache.current.render()
           onLoad?.(
             {
-              type: EventType.Load,
+              type: "load",
               data: "",
             },
             vggInstanceCache.current
           )
         } else {
           onLoadError?.({
-            type: EventType.LoadError,
+            type: "loaderror",
             data: "",
           })
         }
@@ -93,9 +93,9 @@ export function VGGRender<T extends string>(props: Props<T>) {
     }
 
     return () => {
-      if (vggInstanceCache.current) {
-        vggInstanceCache.current.destroy()
-      }
+      // if (vggInstanceCache.current) {
+      //   vggInstanceCache.current.destroy()
+      // }
     }
   }, [src])
 

@@ -1,10 +1,15 @@
-import { EventCallback, VGGWasmInstance, VggSdkType } from "./types"
+import type {
+  EventCallback,
+  VGGWasmInstance,
+  VggSdkType,
+  VGGEventType,
+} from "./types"
 import { EventType, LoadingState, State } from "./constants"
 import { EventManager } from "./events"
 import { Observable } from "./observable"
 import { Logger } from "./logger"
 export { EventType, State } from "./constants"
-export type { VGGEvent, EventCallback } from "./types"
+export type { VGGEvent, EventCallback, VGGEventType } from "./types"
 
 export interface VGGProps {
   canvas: HTMLCanvasElement | OffscreenCanvas
@@ -95,11 +100,11 @@ export class VGG<T extends string> {
 
     // New event management system
     this.eventManager = new EventManager()
-    if (props.onLoad) this.on(EventType.Load, props.onLoad)
-    if (props.onLoadError) this.on(EventType.LoadError, props.onLoadError)
-    if (props.onRendered) this.on(EventType.FirstRender, props.onRendered)
-    if (props.onStateChange) this.on(EventType.StateChange, props.onStateChange)
-    if (props.onSelect) this.on(EventType.Click, props.onSelect)
+    if (props.onLoad) this.on("load", props.onLoad)
+    if (props.onLoadError) this.on("loaderror", props.onLoadError)
+    if (props.onRendered) this.on("firstrender", props.onRendered)
+    if (props.onStateChange) this.on("statechange", props.onStateChange)
+    if (props.onSelect) this.on("click", props.onSelect)
   }
 
   public async load() {
@@ -107,7 +112,7 @@ export class VGG<T extends string> {
       this.updateLoader(LoadingState.StartLoading)
       await this.init({ ...this.props })
     } catch (err: any) {
-      this.eventManager.fire({ type: EventType.LoadError, data: err.message })
+      this.eventManager.fire({ type: "loaderror", data: err.message })
     }
   }
 
@@ -336,7 +341,7 @@ export class VGG<T extends string> {
    * @param type the type of event to subscribe to
    * @param callback callback to fire when the event occurs
    */
-  public on(type: EventType, callback: EventCallback): VGG<T> {
+  public on(type: VGGEventType, callback: EventCallback): VGG<T> {
     this.eventManager.add({
       type: type,
       callback: callback,
@@ -347,11 +352,11 @@ export class VGG<T extends string> {
 
   /**
    * Render the Daruma file
-   * @param darumaUrl
+   * @param darumaSource
    * @param opts
    */
   public async render(
-    darumaUrl?: string,
+    darumaSource?: string | Int8Array,
     opts?: {
       width: number
       height: number
@@ -366,7 +371,7 @@ export class VGG<T extends string> {
       throw new Error("VGG Wasm instance not ready")
     }
 
-    const source = darumaUrl ?? this.src
+    const source = darumaSource ?? this.src
     let buffer: Int8Array
 
     // check if source is a valid url or an Int8Array buffer

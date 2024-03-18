@@ -19,7 +19,8 @@ export function useVGG(options: Options) {
       // eslint-disable-next-line no-extra-semi
       ;(async () => {
         if (vgg.current) {
-          vgg.current.destroy()
+          vgg.current.render(src)
+          return
         }
 
         vgg.current = new VGG({
@@ -48,9 +49,9 @@ export function useVGG(options: Options) {
     }
 
     return () => {
-      if (vgg.current) {
-        vgg.current.destroy()
-      }
+      // if (vgg.current) {
+      //   vgg.current.destroy()
+      // }
     }
   }, [src])
 
