@@ -18,16 +18,18 @@ export type EventCallback = (
 
 export type CurriedCallback = (handlers: CallbackHandlers) => Promise<void>
 
+export type VGGEventType = `${EventType}`
+
 /**
  * Event listeners registered with the event manager
  */
 export interface VGGEventListener {
-  type: EventType
+  type: VGGEventType
   callback: EventCallback
 }
 
 export interface VGGEvent {
-  type: EventType
+  type: VGGEventType
   data?: string | string[] | number
 }
 
