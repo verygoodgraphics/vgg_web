@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-react
 
+## 0.1.17
+
+### Patch Changes
+
+- cache the runtime instance
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.14
+
 ## 0.1.16
 
 ### Patch Changes
