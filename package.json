@@ -5,7 +5,8 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "pnpm -r --filter='./packages/*' run build",
+    "start": "pnpm build && pnpm dev",
+    "build": "pnpm -r run build --filter './packages/*'",
     "dev": "pnpm -r --parallel run dev --filter './packages/*'",
     "release": "tsx scripts/release.ts",
     "changeset": "changeset",

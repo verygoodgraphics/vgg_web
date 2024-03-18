@@ -31,7 +31,9 @@
     }
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "pnpm run /^watch:.*/",
+    "watch:lib": "vite build --watch",
+    "watch:ui": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

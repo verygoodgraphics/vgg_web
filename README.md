@@ -26,6 +26,13 @@ Meanwhile, it provides high-level APIs to add interactions to the design files, 
 
 ## Getting Started
 
+### Development
+
+```bash
+pnpm install
+pnpm start
+```
+
 ### API Docs
 
 - [JS/TS](https://github.com/verygoodgraphics/vgg_web/tree/main/packages/wasm)
