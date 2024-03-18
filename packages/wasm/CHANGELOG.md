@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.14
+
+### Patch Changes
+
+- cache the runtime instance
+
 ## 0.1.13
 
 ### Patch Changes
