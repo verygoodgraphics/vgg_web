@@ -1,5 +1,12 @@
 # @verygoodgraphics/vgg-vue
 
+## 0.1.15
+
+### Patch Changes
+
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.15
+
 ## 0.1.14
 
 ### Patch Changes
