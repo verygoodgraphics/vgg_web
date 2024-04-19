@@ -80,6 +80,11 @@ interface EventListeners {
   EventType?: Array<EventListenerItem>
 }
 
+export type Frame = {
+  id: string
+  name: string
+}
+
 export interface VggSdkType {
   // addObserver(observer: VggSdkObserver): void;
   listeners: Map<string, CurriedCallback>
@@ -98,7 +103,18 @@ export interface VggSdkType {
   getElement(id: string): string
   updateElement(id: string, value: string): void
 
-  addFont(font: Uint8Array, name: string): void
+  addFont(font: Uint8Array, name: string): boolean
+
+  texts(): string[]
+
+  makeImageSnapshot(opts: {
+    type: "png" | "jpg" | "webp"
+    quality: number // 0 - 100
+  }): Uint8Array
+
+  getFramesInfo(): string
+  setCurrentFrameById(frameName: string): void
+  currentFrameId(): string
 }
 
 declare global {

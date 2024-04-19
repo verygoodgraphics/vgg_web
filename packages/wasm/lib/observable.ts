@@ -11,7 +11,7 @@ export class Observable {
     this.vggSdk = vggSdk
   }
 
-  public on(eventType: EventType, callback: VGGEventCallback): Observable {
+  public on(eventType: `${EventType}`, callback: VGGEventCallback): Observable {
     this.addEventListener(this.selector, eventType, callback)
 
     return this
@@ -66,8 +66,12 @@ export class Observable {
 
     const currentInstance = globalThis["vggInstances"][this.vggSdk.getEnv()]
     if (currentInstance) {
-      // Set the callback to the listenersMap in current instance
-      currentInstance.listeners.set(uniqueId, curriedCallback)
+      try {
+        // Set the callback to the listenersMap in current instance
+        currentInstance.listeners.set(uniqueId, curriedCallback)
+      } catch (err) {
+        console.error(err)
+      }
     }
 
     return {

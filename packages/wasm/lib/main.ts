@@ -3,6 +3,7 @@ import type {
   VGGWasmInstance,
   VggSdkType,
   VGGEventType,
+  Frame,
 } from "./types"
 import { EventType, LoadingState, State } from "./constants"
 import { EventManager } from "./events"
@@ -62,7 +63,7 @@ export class VGG<T extends string> {
   // Holds event listeners
   private eventManager: EventManager
 
-  public state: State = State.Loading
+  public state: `${State}` = State.Loading
 
   private onLoadingStateUpdate: (state: LoadingState) => void
 
@@ -163,6 +164,8 @@ export class VGG<T extends string> {
       )
     })
 
+    console.log("VGG SDK ready", this.vggSdk)
+
     // load fonts
     await this.loadFonts()
 
@@ -197,7 +200,7 @@ export class VGG<T extends string> {
       clearTimeout(timer)
       return instance
     } catch (err) {
-      // console.error(err)
+      console.error(err)
       return null
     }
   }
@@ -211,6 +214,8 @@ export class VGG<T extends string> {
 
     if (window._vgg_createWasmInstance) {
       const wasmInstance = await this.createVggWasmInstance()
+
+      console.log(88888, wasmInstance)
 
       if (wasmInstance) {
         this.vggWasmInstance = wasmInstance
@@ -326,13 +331,21 @@ export class VGG<T extends string> {
         .then((buf) => {
           const data = new Uint8Array(buf)
           const fontName = font.split("/").pop()?.split(".")[0] ?? ""
-          if (!this.vggSdk?.addFont(data, fontName)) {
-            throw new Error("add font failed!")
-          }
+          this.loadFontFile(data, fontName)
         })
         .catch((err) => {
           console.error(`Failed to add font: ${err.message}`)
         })
+    }
+  }
+
+  public loadFontFile(font: Uint8Array, name: string) {
+    if (!this.vggSdk) {
+      throw new Error("VGG SDK not ready")
+    }
+
+    if (!this.vggSdk.addFont(font, name)) {
+      throw new Error("add font failed!")
     }
   }
 
@@ -375,7 +388,7 @@ export class VGG<T extends string> {
     let buffer: Int8Array
 
     // check if source is a valid url or an Int8Array buffer
-    if (typeof source === "string" && source.startsWith("http")) {
+    if (typeof source === "string") {
       this.updateLoader(LoadingState.DownloadSourceFile)
       const res = await fetch(source)
       if (!res.ok) throw new Error("Failed to fetch Daruma file")
@@ -445,6 +458,41 @@ export class VGG<T extends string> {
     this.observables.clear()
 
     return this
+  }
+
+  public getTextContent() {
+    const text = this.vggSdk?.texts()
+    return text ?? []
+  }
+
+  public snapshot(
+    opts: {
+      type: "png" | "jpg" | "webp"
+      quality: number
+    } = {
+      type: "png",
+      quality: 100,
+    }
+  ) {
+    const snapshot = this.vggSdk?.makeImageSnapshot(opts)
+    return snapshot
+  }
+
+  public getAllFrames() {
+    const frames = this.vggSdk?.getFramesInfo()
+    if (frames) {
+      return JSON.parse(frames) as Frame[]
+    }
+
+    return []
+  }
+
+  public setCurrentFrame(id: string) {
+    this.vggSdk?.setCurrentFrameById(id)
+  }
+
+  public get currentFrameId() {
+    return this.vggSdk?.currentFrameId()
   }
 }
 
