@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-react
 
+## 0.1.20
+
+### Patch Changes
+
+- update: export type Frame
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.16
+
 ## 0.1.19
 
 ### Patch Changes
