@@ -10,7 +10,7 @@ import { EventManager } from "./events"
 import { Observable } from "./observable"
 import { Logger } from "./logger"
 export { EventType, State } from "./constants"
-export type { VGGEvent, EventCallback, VGGEventType } from "./types"
+export type { VGGEvent, EventCallback, VGGEventType, Frame } from "./types"
 
 export interface VGGProps {
   canvas: HTMLCanvasElement | OffscreenCanvas
