@@ -10,6 +10,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <canvas id="canvas"></canvas>
     <div id="frames"></div>
     <button id="snapshot">Snapshot</button>
+    <div id="prev">Prev</div>
+    <div id="next">Next</div>
   </div>
 `
 
@@ -76,5 +78,15 @@ if (vgg.state === "ready") {
       a.download = "snapshot.png"
       a.click()
     }
+  })
+
+  document.querySelector("#prev")!.addEventListener("click", async () => {
+    vgg.prevFrame()
+    console.log("Current Frame Id: ", vgg.currentFrameId)
+  })
+
+  document.querySelector("#next")!.addEventListener("click", async () => {
+    vgg.nextFrame()
+    console.log("Current Frame Id: ", vgg.currentFrameId)
   })
 }

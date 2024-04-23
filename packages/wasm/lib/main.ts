@@ -491,6 +491,25 @@ export class VGG<T extends string> {
     this.vggSdk?.setCurrentFrameById(id)
   }
 
+  public nextFrame() {
+    const frames = this.getAllFrames()
+    const currentFrameIndex = frames.findIndex(
+      (frame) => frame.id === this.currentFrameId
+    )
+    const nextFrameIndex = (currentFrameIndex + 1) % frames.length
+    this.setCurrentFrame(frames[nextFrameIndex].id)
+  }
+
+  public prevFrame() {
+    const frames = this.getAllFrames()
+    const currentFrameIndex = frames.findIndex(
+      (frame) => frame.id === this.currentFrameId
+    )
+    const prevFrameIndex =
+      (currentFrameIndex - 1 + frames.length) % frames.length
+    this.setCurrentFrame(frames[prevFrameIndex].id)
+  }
+
   public get currentFrameId() {
     return this.vggSdk?.currentFrameId()
   }
