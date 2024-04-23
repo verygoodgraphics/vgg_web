@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-react
 
+## 0.1.22
+
+### Patch Changes
+
+- update: include size property in frame
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.18
+
 ## 0.1.21
 
 ### Patch Changes
