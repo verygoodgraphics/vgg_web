@@ -83,6 +83,8 @@ interface EventListeners {
 export type Frame = {
   id: string
   name: string
+  width: number
+  height: number
 }
 
 export interface VggSdkType {
@@ -113,7 +115,7 @@ export interface VggSdkType {
   }): Uint8Array
 
   getFramesInfo(): string
-  setCurrentFrameById(frameName: string): void
+  setCurrentFrameById(frameName: string, preserveScrollHeight: boolean): void
   currentFrameId(): string
 }
 

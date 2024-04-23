@@ -486,7 +486,7 @@ export class VGG<T extends string> {
   }
 
   public setCurrentFrame(id: string) {
-    this.vggSdk?.setCurrentFrameById(id)
+    this.vggSdk?.setCurrentFrameById(id, true)
   }
 
   public nextFrame() {

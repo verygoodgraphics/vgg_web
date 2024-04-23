@@ -21,7 +21,7 @@ const vgg = new VGG({
   // src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/feature/geometry/geometry__transform__rotation.daruma",
   src: "http://localhost:3030/d/clv1tt4j60008i80yxnqjhysc",
   runtime: "https://s3.vgg.cool/test/runtime/latest",
-  editMode: true,
+  // editMode: true,
   verbose: true,
   // disableLoader: true,
   canvas: document.querySelector("#canvas") as HTMLCanvasElement,
