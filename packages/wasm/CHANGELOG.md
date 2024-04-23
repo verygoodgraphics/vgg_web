@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.17
+
+### Patch Changes
+
+- update: support [next/prev] frame
+
 ## 0.1.16
 
 ### Patch Changes
