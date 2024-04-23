@@ -5,7 +5,7 @@
     "type": "git",
     "url": "https://github.com/verygoodgraphics/vgg_react.git"
   },
-  "version": "0.1.20",
+  "version": "0.1.21",
   "type": "module",
   "files": [
     "dist"
