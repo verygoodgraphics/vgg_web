@@ -1,5 +1,12 @@
 # @verygoodgraphics/vgg-svelte
 
+## 0.1.19
+
+### Patch Changes
+
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.18
+
 ## 0.1.18
 
 ### Patch Changes

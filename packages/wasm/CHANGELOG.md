@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.18
+
+### Patch Changes
+
+- update: include size property in frame
+
 ## 0.1.17
 
 ### Patch Changes
