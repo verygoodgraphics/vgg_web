@@ -215,8 +215,6 @@ export class VGG<T extends string> {
     if (window._vgg_createWasmInstance) {
       const wasmInstance = await this.createVggWasmInstance()
 
-      console.log(88888, wasmInstance)
-
       if (wasmInstance) {
         this.vggWasmInstance = wasmInstance
 
