@@ -1,7 +1,7 @@
 {
 	"name": "@verygoodgraphics/vgg-svelte",
 	"homepage": "https://verygoodgraphics.com/",
-	"version": "0.1.19",
+	"version": "0.1.20",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/verygoodgraphics/vgg_svelte.git"

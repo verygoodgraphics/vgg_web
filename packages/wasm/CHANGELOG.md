@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.19
+
+### Patch Changes
+
+- support two new apis: 1. setContentMode; 2. setFitToViewportEnabled
+
 ## 0.1.18
 
 ### Patch Changes
