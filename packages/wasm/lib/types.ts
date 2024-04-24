@@ -117,6 +117,9 @@ export interface VggSdkType {
   getFramesInfo(): string
   setCurrentFrameById(frameName: string, preserveScrollHeight: boolean): void
   currentFrameId(): string
+
+  setFitToViewportEnabled(enabled: boolean): void
+  setContentMode(mode: "topLeft" | "scaleAspectFill" | "scaleAspectFit"): void
 }
 
 declare global {

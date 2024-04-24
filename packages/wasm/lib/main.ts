@@ -476,6 +476,27 @@ export class VGG<T extends string> {
     return snapshot
   }
 
+  public setContentMode(mode: "fit" | "fill" | "original" = "fit") {
+    if (!this.vggSdk) {
+      throw new Error("VGG SDK not ready")
+    }
+
+    if (mode === "original") {
+      this.vggSdk.setContentMode("topLeft")
+    } else if (mode === "fit") {
+      this.vggSdk.setContentMode("scaleAspectFit")
+    } else if (mode === "fill") {
+      this.vggSdk.setContentMode("scaleAspectFill")
+    } else {
+      throw new Error("Invalid content mode")
+    }
+  }
+
+  // turn on/off the breakpoint mode
+  public setFitToViewportEnabled(bool: boolean) {
+    this.vggSdk?.setFitToViewportEnabled(bool)
+  }
+
   public getAllFrames() {
     const frames = this.vggSdk?.getFramesInfo()
     if (frames) {
@@ -485,8 +506,8 @@ export class VGG<T extends string> {
     return []
   }
 
-  public setCurrentFrame(id: string) {
-    this.vggSdk?.setCurrentFrameById(id, true)
+  public setCurrentFrame(id: string, preserveScrollHeight = true) {
+    this.vggSdk?.setCurrentFrameById(id, preserveScrollHeight)
   }
 
   public nextFrame() {
