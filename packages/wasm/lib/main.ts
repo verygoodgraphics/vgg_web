@@ -476,7 +476,9 @@ export class VGG<T extends string> {
     return snapshot
   }
 
-  public setContentMode(mode: "fit" | "fill" | "original" = "fit") {
+  public setContentMode(
+    mode: "fit" | "fill" | "original" | "autoFill" = "fit"
+  ) {
     if (!this.vggSdk) {
       throw new Error("VGG SDK not ready")
     }
@@ -487,6 +489,8 @@ export class VGG<T extends string> {
       this.vggSdk.setContentMode("scaleAspectFit")
     } else if (mode === "fill") {
       this.vggSdk.setContentMode("scaleAspectFill")
+    } else if (mode === "autoFill") {
+      this.vggSdk.setContentMode("scaleAspectFillTopCenter")
     } else {
       throw new Error("Invalid content mode")
     }
