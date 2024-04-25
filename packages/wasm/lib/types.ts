@@ -119,7 +119,13 @@ export interface VggSdkType {
   currentFrameId(): string
 
   setFitToViewportEnabled(enabled: boolean): void
-  setContentMode(mode: "topLeft" | "scaleAspectFill" | "scaleAspectFit"): void
+  setContentMode(
+    mode:
+      | "topLeft"
+      | "scaleAspectFill"
+      | "scaleAspectFit"
+      | "scaleAspectFillTopCenter"
+  ): void
 }
 
 declare global {
