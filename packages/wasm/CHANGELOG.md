@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.20
+
+### Patch Changes
+
+- add autoFill property
+
 ## 0.1.19
 
 ### Patch Changes
