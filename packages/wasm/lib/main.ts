@@ -536,6 +536,20 @@ export class VGG<T extends string> {
   public get currentFrameId() {
     return this.vggSdk?.currentFrameId()
   }
+
+  public getFontsInUse() {
+    const fonts = this.vggSdk?.requiredFonts()
+
+    if (!fonts) return []
+
+    try {
+      const _parsedFonts = JSON.parse(fonts)
+      return _parsedFonts
+    } catch (err) {
+      console.error(err)
+      return []
+    }
+  }
 }
 
 if (typeof globalThis !== "undefined") {
