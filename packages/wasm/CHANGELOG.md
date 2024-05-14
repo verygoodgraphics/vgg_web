@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.21
+
+### Patch Changes
+
+- Update: export getFontsInUse func
+
 ## 0.1.20
 
 ### Patch Changes
