@@ -118,6 +118,8 @@ export interface VggSdkType {
   setCurrentFrameById(frameName: string, preserveScrollHeight: boolean): void
   currentFrameId(): string
 
+  requiredFonts(): string
+
   setFitToViewportEnabled(enabled: boolean): void
   setContentMode(
     mode:

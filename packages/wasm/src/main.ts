@@ -16,10 +16,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 `
 
 const vgg = new VGG({
-  // src: "https://s3.vgg.cool/test/vgg.daruma",
-  // src: "https://verygoodgraphics.com/d/clqywc8tu002bo9mn8bctgekn",
+  src: "https://s3.vgg.cool/test/vgg.daruma",
   // src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/feature/geometry/geometry__transform__rotation.daruma",
-  src: "http://localhost:3030/d/clv1tt4j60008i80yxnqjhysc",
   runtime: "https://s3.vgg.cool/test/runtime/latest",
   // editMode: true,
   verbose: true,
@@ -37,6 +35,10 @@ await vgg.load()
 
 if (vgg.state === "ready") {
   await vgg.render()
+
+  const fontsInUse = vgg.getFontsInUse()
+
+  console.log({ fontsInUse })
 
   vgg.$("#increase").on("click", async (_, { get, set }) => {
     const count = get("#counter").content
