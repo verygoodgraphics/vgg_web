@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-svelte
 
+## 0.1.23
+
+### Patch Changes
+
+- init vgg_render
+
 ## 0.1.22
 
 ### Patch Changes
