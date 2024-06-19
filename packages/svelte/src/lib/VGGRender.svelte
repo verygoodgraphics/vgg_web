@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { VGG, State, type VGGEvent, EventType } from '@verygoodgraphics/vgg-wasm';
 
 	export let canvasStyle = '';
@@ -64,6 +64,10 @@
 	};
 
 	$: vgg = init(src);
+
+	onMount(() => {
+		vgg = init(src);
+	});
 
 	onDestroy(() => {
 		if (vgg) {
