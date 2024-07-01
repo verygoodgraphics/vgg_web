@@ -26,6 +26,7 @@ const vgg = new VGG({
   onSelect: async (event) => console.log("Select", event),
   onLoadingStateUpdate: (state) => console.log("Loading State", state),
   customFonts: ["./Roboto-Black.ttf"],
+  onReady: async () => console.log("Ready"),
   // onLoad: async (event) => console.log("Load", event),
   // onLoadError: async (event) => console.log("Load Error", event),
   // onStateChange: async (state) => console.log("State Change", state),

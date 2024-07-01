@@ -34,6 +34,9 @@ function App() {
             width: "50vw",
             height: "100vh",
           }}
+          onReady={async (e, instance) => {
+            console.log(e, instance)
+          }}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // onLoad={async (_, instance) => {
           //   // instance.$("#vgg-btn-get-started").on(EventType.Click, async () => {
