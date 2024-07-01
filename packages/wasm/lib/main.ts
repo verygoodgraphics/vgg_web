@@ -111,12 +111,12 @@ export class VGG<T extends string> {
 
     // New event management system
     this.eventManager = new EventManager()
-    if (props.onLoad) this.on("load", props.onLoad)
-    if (props.onLoadError) this.on("loaderror", props.onLoadError)
-    if (props.onReady) this.on("ready", props.onReady)
-    if (props.onRendered) this.on("firstrender", props.onRendered)
-    if (props.onStateChange) this.on("statechange", props.onStateChange)
-    if (props.onSelect) this.on("click", props.onSelect)
+    if (props.onLoad) this.on(EventType.Load, props.onLoad)
+    if (props.onLoadError) this.on(EventType.LoadError, props.onLoadError)
+    if (props.onReady) this.on(EventType.Ready, props.onReady)
+    if (props.onRendered) this.on(EventType.FirstRender, props.onRendered)
+    if (props.onStateChange) this.on(EventType.StateChange, props.onStateChange)
+    if (props.onSelect) this.on(EventType.Click, props.onSelect)
   }
 
   public async load() {
@@ -424,7 +424,7 @@ export class VGG<T extends string> {
       ["name", buffer, buffer.length]
     )
 
-    this.eventManager.fire({ type: EventType.Ready })
+    this.eventManager.fire({ type: EventType.Ready }, this.vggSdk)
 
     if (!isLoaded) {
       throw new Error("Failed to load Daruma file")

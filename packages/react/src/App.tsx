@@ -7,7 +7,7 @@ import { VGGRender } from "../lib/vgg"
 import "./App.css"
 
 function App() {
-  const { canvasRef, vgg, isRendered } = useVGG({
+  const { vgg, isRendered } = useVGG({
     src: "https://s3.vgg.cool/test/vgg.daruma",
     runtime: "https://s3.vgg.cool/test/runtime/latest",
   })
@@ -35,11 +35,11 @@ function App() {
             height: "100vh",
           }}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          onLoad={async (_, instance) => {
-            // instance.$("#vgg-btn-get-started").on(EventType.Click, async () => {
-            //   window.alert("Hello World from VGGRender Component!")
-            // })
-          }}
+          // onLoad={async (_, instance) => {
+          //   // instance.$("#vgg-btn-get-started").on(EventType.Click, async () => {
+          //   //   window.alert("Hello World from VGGRender Component!")
+          //   // })
+          // }}
         />
       </div>
       <div className="relative">
@@ -56,11 +56,11 @@ function App() {
             height: "100vh",
           }}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          onLoad={async (_, instance) => {
-            // instance.$("#vgg-btn-get-started").on(EventType.Click, async () => {
-            //   window.alert("Hello World from VGGRender Component!")
-            // })
-          }}
+          // onLoad={async (_, instance) => {
+          //   // instance.$("#vgg-btn-get-started").on(EventType.Click, async () => {
+          //   //   window.alert("Hello World from VGGRender Component!")
+          //   // })
+          // }}
         />
       </div>
       {/* <div className="relative">
