@@ -39,6 +39,7 @@ export function VGGRender<T extends string>(props: Props<T>) {
     onLoadError,
     onStateChange,
     onSelect,
+    onReady,
     onRendered,
   } = props
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -63,13 +64,11 @@ export function VGGRender<T extends string>(props: Props<T>) {
           customFonts,
           onStateChange,
           onSelect,
-          onRendered: async () => {
+          onRendered: async (e) => {
             setTimeout(() => setLoading(false))
-            onRendered?.({
-              type: "firstrender",
-              data: "",
-            })
+            onRendered?.(e)
           },
+          onReady,
           onLoadError: async (event) => {
             setLoading(false)
             onLoadError?.(event)
