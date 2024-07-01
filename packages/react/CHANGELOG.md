@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-react
 
+## 0.1.27
+
+### Patch Changes
+
+- Update: add lifecycle hook -> ready
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.23
+
 ## 0.1.26
 
 ### Patch Changes
