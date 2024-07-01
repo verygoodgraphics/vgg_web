@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.24
+
+### Patch Changes
+
+- update: return vgg instance
+
 ## 0.1.23
 
 ### Patch Changes
