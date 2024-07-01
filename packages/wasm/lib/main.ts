@@ -20,9 +20,19 @@ export interface VGGProps {
   verbose?: boolean
   disableLoader?: boolean
   customFonts?: string[]
+  /**
+   * On vgg instance load
+   */
   onLoad?: EventCallback
   onLoadError?: EventCallback
+  /**
+   * On Daruma file load
+   */
+  onReady?: EventCallback
   onStateChange?: EventCallback
+  /**
+   * On first render
+   */
   onRendered?: EventCallback
   onSelect?: EventCallback
   onLoadingStateUpdate?: (state: LoadingState) => void
@@ -103,6 +113,7 @@ export class VGG<T extends string> {
     this.eventManager = new EventManager()
     if (props.onLoad) this.on("load", props.onLoad)
     if (props.onLoadError) this.on("loaderror", props.onLoadError)
+    if (props.onReady) this.on("ready", props.onReady)
     if (props.onRendered) this.on("firstrender", props.onRendered)
     if (props.onStateChange) this.on("statechange", props.onStateChange)
     if (props.onSelect) this.on("click", props.onSelect)
@@ -413,6 +424,8 @@ export class VGG<T extends string> {
       ["name", buffer, buffer.length]
     )
 
+    this.eventManager.fire({ type: EventType.Ready })
+
     if (!isLoaded) {
       throw new Error("Failed to load Daruma file")
     }
@@ -511,6 +524,12 @@ export class VGG<T extends string> {
   }
 
   public setCurrentFrame(id: string, preserveScrollHeight = true) {
+    // console.log(
+    //   111,
+    //   id,
+    //   this.vggSdk?.getEnv(),
+    //   this.vggSdk?.setCurrentFrameById
+    // )
     this.vggSdk?.setCurrentFrameById(id, preserveScrollHeight)
   }
 

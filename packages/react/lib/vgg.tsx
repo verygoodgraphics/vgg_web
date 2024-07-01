@@ -64,11 +64,15 @@ export function VGGRender<T extends string>(props: Props<T>) {
           onStateChange,
           onSelect,
           onRendered: async () => {
-            setLoading(false)
+            setTimeout(() => setLoading(false))
             onRendered?.({
               type: "firstrender",
               data: "",
             })
+          },
+          onLoadError: async (event) => {
+            setLoading(false)
+            onLoadError?.(event)
           },
         })
 
@@ -117,6 +121,7 @@ export function VGGRender<T extends string>(props: Props<T>) {
             color: "#fff",
             ...loadingMaskStyle,
           }}
+          className={isLoading ? "visible" : "hidden"}
         >
           {loadingComponent ?? <div>Loading...</div>}
         </div>
