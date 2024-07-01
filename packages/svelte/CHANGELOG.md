@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-svelte
 
+## 0.1.25
+
+### Patch Changes
+
+- Update: add lifecycle hook -> ready
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.23
+
 ## 0.1.24
 
 ### Patch Changes
