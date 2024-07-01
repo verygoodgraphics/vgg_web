@@ -94,10 +94,6 @@ export interface VggSdkType {
   getEnv(): string
   getDesignDocument(): string
 
-  addAt(path: string, value: string): void
-  deleteAt(path: string): void
-  updateAt(path: string, value: string): void
-
   addEventListener(path: string, type: string, code: string): void
   removeEventListener(path: string, type: string, code: string): void
   getEventListeners(path: string): EventListeners

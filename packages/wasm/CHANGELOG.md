@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.22
+
+### Patch Changes
+
+- Add ready lifecycle hook
+
 ## 0.1.21
 
 ### Patch Changes
