@@ -424,7 +424,7 @@ export class VGG<T extends string> {
       ["name", buffer, buffer.length]
     )
 
-    this.eventManager.fire({ type: EventType.Ready }, this.vggSdk)
+    this.eventManager.fire({ type: EventType.Ready }, this)
 
     if (!isLoaded) {
       throw new Error("Failed to load Daruma file")
