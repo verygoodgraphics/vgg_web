@@ -1,5 +1,14 @@
 # VGG Vue
 
+## Environment
+
+Create a `.env` file and set the VGG runtime URL if you want to use a specific version, otherwise it will use the latest version.
+
+```bash
+# Open your terminal and goto the root directory of your project
+cp /packages/vue/.env.example /packages/vue/.env
+```
+
 ## Usage
 
 ### `<VGGRender />`
