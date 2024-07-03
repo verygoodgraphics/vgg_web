@@ -12,6 +12,7 @@ export default defineConfig({
       name: "vgg-react",
       fileName: "vgg-react",
     },
+    outDir: resolve(__dirname, "dist"),
     rollupOptions: {
       external: ["react"],
       output: {

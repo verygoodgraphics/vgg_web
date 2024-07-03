@@ -50,6 +50,7 @@ if (vgg.state === State.Ready) await vgg.render()
 | Option               | Type                                     | Required | Default                            |
 | -------------------- | ---------------------------------------- | -------- | ---------------------------------- |
 | canvas               | `HTMLCanvasElement` \| `OffscreenCanvas` | ✅       | -                                  |
+| src                  | `string` \| `Int8Array`                  | ✅       | -                                  |
 | runtime              | `string`                                 | -        | https://s5.vgg.cool/runtime/latest |
 | editMode             | `boolean`                                | -        | `false`                            |
 | verbose              | `boolean`                                | -        | `false`                            |

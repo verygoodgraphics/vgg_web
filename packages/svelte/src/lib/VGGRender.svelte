@@ -4,8 +4,7 @@
 
 	export let canvasStyle = '';
 	export let src = '';
-	// @ts-expect-error
-	export let runtime = import.meta.env.VITE_VGG_RUNTIME;
+	export let runtime;
 	export let editMode = false;
 	export let verbose = false;
 	export let customFonts = [] as string[];
@@ -25,8 +24,8 @@
 		}
 
 		const vggInstance = new VGG({
-			src: src,
-			runtime: runtime,
+			src,
+			runtime,
 			editMode,
 			verbose,
 			canvas: canvasElement,

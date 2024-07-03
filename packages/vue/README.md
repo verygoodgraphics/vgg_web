@@ -31,7 +31,7 @@ function handleLoad(event: VGGEvent, instance: VGG<"#vgg_home">) {
 
 | Option               | Type                                                   | Required | Default                            |
 | -------------------- | ------------------------------------------------------ | -------- | ---------------------------------- |
-| src                  | `string`                                               | -        | -                                  |
+| src                  | `string` \| `Int8Array`                                | -        | -                                  |
 | runtime              | `string`                                               | -        | https://s5.vgg.cool/runtime/latest |
 | canvasStyle          | `StyleValue`                                           | -        | -                                  |
 | editMode             | `boolean`                                              | -        | `false`                            |
