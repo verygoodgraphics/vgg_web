@@ -4,7 +4,8 @@
 
 	export let canvasStyle = '';
 	export let src = '';
-	export let runtime = 'https://s5.vgg.cool/runtime/latest';
+	// @ts-expect-error
+	export let runtime = import.meta.env.VITE_VGG_RUNTIME;
 	export let editMode = false;
 	export let verbose = false;
 	export let customFonts = [] as string[];
@@ -24,8 +25,8 @@
 		}
 
 		const vggInstance = new VGG({
-			src: src ?? 'https://s3.vgg.cool/test/vgg.daruma',
-			runtime: runtime ?? 'https://s5.vgg.cool/runtime/latest',
+			src: src,
+			runtime: runtime,
 			editMode,
 			verbose,
 			canvas: canvasElement,

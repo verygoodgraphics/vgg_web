@@ -4,7 +4,7 @@
 
 A JavaScript/TypeScript/React/Vue/Svelte component library that wraps the [WASM](https://developer.mozilla.org/en-US/docs/WebAssembly) version of the [VGG Runtime](https://github.com/verygoodgraphics/vgg_runtime).
 
-This library allows you to embed [VGG Daruma](https://verygoodgraphics.com/daruma) design files into a web page, no matter what framework you are using.
+This library allows you to embed [VGG Daruma](https://daruma.run) design files into a web page, no matter what framework you are using.
 
 Meanwhile, it provides high-level APIs to add interactions to the design files, as well as low-level APIs that allow you to drive your own rendering loop to create multiple artboards all in one canvas.
 

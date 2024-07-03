@@ -29,7 +29,7 @@ export function VGGRender<T extends string>(props: Props<T>) {
     className,
     src,
     canvasStyle,
-    runtime,
+    runtime = import.meta.env.VITE_VGG_RUNTIME,
     editMode,
     verbose,
     loadingMaskStyle,
@@ -57,7 +57,7 @@ export function VGGRender<T extends string>(props: Props<T>) {
 
         vggInstanceCache.current = new VGG({
           src: src,
-          runtime: runtime ?? "https://s5.vgg.cool/runtime/latest",
+          runtime,
           editMode,
           verbose,
           canvas: canvasRef.current!,

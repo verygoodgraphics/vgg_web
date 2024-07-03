@@ -16,9 +16,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 `
 
 const vgg = new VGG({
-  src: "https://s3.vgg.cool/test/vgg.daruma",
-  // src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/feature/geometry/geometry__transform__rotation.daruma",
-  runtime: "https://s3.vgg.cool/test/runtime/latest",
+  src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma",
+  runtime: import.meta.env.VGG_RUNTIME,
   // editMode: true,
   verbose: true,
   // disableLoader: true,
