@@ -8,8 +8,7 @@ import "./App.css"
 
 function App() {
   const { vgg, isRendered } = useVGG({
-    src: "https://s3.vgg.cool/test/vgg.daruma",
-    runtime: "https://s3.vgg.cool/test/runtime/latest",
+    src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma",
   })
 
   useEffect(() => {
@@ -28,15 +27,14 @@ function App() {
           </h2>
         </div>
         <VGGRender
-          src="https://s3.vgg.cool/test/vgg.daruma"
-          runtime="https://s3.vgg.cool/test/runtime/latest"
+          src="https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma"
           canvasStyle={{
             width: "50vw",
             height: "100vh",
           }}
-          onReady={async (e, instance) => {
-            console.log(e, instance)
-          }}
+          // onReady={async (e, instance) => {
+          //   console.log(e, instance)
+          // }}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // onLoad={async (_, instance) => {
           //   // instance.$("#vgg-btn-get-started").on(EventType.Click, async () => {
@@ -52,8 +50,7 @@ function App() {
           </h2>
         </div>
         <VGGRender
-          src="https://s3.vgg.cool/test/vgg.daruma"
-          runtime="https://s3.vgg.cool/test/runtime/latest"
+          src="https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma"
           canvasStyle={{
             width: "50vw",
             height: "100vh",

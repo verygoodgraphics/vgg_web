@@ -47,7 +47,7 @@ export type VGGNode = {
 export class VGG<T extends string> {
   readonly props: VGGProps
 
-  private defaultRuntime: string = "https://s5.vgg.cool/runtime/latest"
+  private defaultRuntime: string = import.meta.env.VITE_VGG_RUNTIME
 
   // Canvas for rendering
   private readonly canvas: HTMLCanvasElement | OffscreenCanvas

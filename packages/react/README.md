@@ -9,7 +9,7 @@ import { VGGRender } from "@verygoodgraphics/vgg-react"
 
 return (
   <VGGRender
-    src="https://s3.vgg.cool/test/vgg.daruma"
+    src="https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma"
     canvasStyle={{
       width: "50vw",
       height: "100vh",
@@ -29,7 +29,7 @@ return (
 import { useVGG } from "@verygoodgraphics/vgg-react"
 
 const { canvasRef, vgg, isLoading } = useVGG({
-  src: "https://s3.vgg.cool/test/vgg.daruma",
+  src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma",
 })
 
 useEffect(() => {
@@ -54,25 +54,37 @@ return (
 
 ### Options for `useVGG()`
 
-| Option        | Type            | Required | Default                            |
-| ------------- | --------------- | -------- | ---------------------------------- |
-| src           | `string`        | -        | -                                  |
-| runtime       | `string`        | -        | https://s5.vgg.cool/runtime/latest |
-| editMode      | `boolean`       | -        | false                              |
-| verbose       | `boolean`       | -        | false                              |
-| onLoad        | `EventCallback` | -        | -                                  |
-| onLoadError   | `EventCallback` | -        | -                                  |
-| onStateChange | `EventCallback` | -        | -                                  |
+| Option               | Type                                                   | Required | Default                            |
+| -------------------- | ------------------------------------------------------ | -------- | ---------------------------------- |
+| src                  | `string`                                               | ✅       | -                                  |
+| runtime              | `string`                                               | -        | https://s5.vgg.cool/runtime/latest |
+| editMode             | `boolean`                                              | -        | `false`                            |
+| verbose              | `boolean`                                              | -        | `false`                            |
+| disableLoader        | `boolean`                                              | -        | `false`                            |
+| customFonts          | `string[]`                                             | -        | `[]`                               |
+| onLoad               | `(event: VGGEvent, instance: VGG<T>) => Promise<void>` | -        | -                                  |
+| onLoadError          | `(event: VGGEvent) => Promise<void>`                   | -        | -                                  |
+| onReady              | `EventCallback`                                        | -        | -                                  |
+| onRendered           | `EventCallback`                                        | -        | -                                  |
+| onStateChange        | `(event: VGGEvent, instance: VGG<T>) => Promise<void>` | -        | -                                  |
+| onSelect             | `EventCallback`                                        | -        | -                                  |
+| onLoadingStateUpdate | `(state: LoadingState) => void`                        | -        | -                                  |
 
 ### Props for `<VGGRender />`
 
-| Option        | Type                                                   | Required | Default                            |
-| ------------- | ------------------------------------------------------ | -------- | ---------------------------------- |
-| src           | `string`                                               | -        | -                                  |
-| runtime       | `string`                                               | -        | https://s5.vgg.cool/runtime/latest |
-| canvasStyle   | `React.CSSProperties`                                  | -        | -                                  |
-| editMode      | `boolean`                                              | -        | false                              |
-| verbose       | `boolean`                                              | -        | false                              |
-| onLoad        | `(event: VGGEvent, instance: VGG<T>) => Promise<void>` | -        | -                                  |
-| onLoadError   | `(event: VGGEvent) => Promise<void>`                   | -        | -                                  |
-| onStateChange | `(event: VGGEvent, instance: VGG<T>) => Promise<void>` | -        | -                                  |
+| Option               | Type                                                   | Required | Default                            |
+| -------------------- | ------------------------------------------------------ | -------- | ---------------------------------- |
+| src                  | `string`                                               | ✅       | -                                  |
+| runtime              | `string`                                               | -        | https://s5.vgg.cool/runtime/latest |
+| canvasStyle          | `React.CSSProperties`                                  | -        | -                                  |
+| editMode             | `boolean`                                              | -        | `false`                            |
+| verbose              | `boolean`                                              | -        | `false`                            |
+| disableLoader        | `boolean`                                              | -        | `false`                            |
+| customFonts          | `string[]`                                             | -        | `[]`                               |
+| onLoad               | `(event: VGGEvent, instance: VGG<T>) => Promise<void>` | -        | -                                  |
+| onLoadError          | `(event: VGGEvent) => Promise<void>`                   | -        | -                                  |
+| onReady              | `EventCallback`                                        | -        | -                                  |
+| onRendered           | `EventCallback`                                        | -        | -                                  |
+| onStateChange        | `(event: VGGEvent, instance: VGG<T>) => Promise<void>` | -        | -                                  |
+| onSelect             | `EventCallback`                                        | -        | -                                  |
+| onLoadingStateUpdate | `(state: LoadingState) => void`                        | -        | -                                  |

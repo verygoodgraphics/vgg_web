@@ -8,7 +8,7 @@
 <script src="https://www.unpkg.com/@verygoodgraphics/vgg-wasm"></script>
 <script>
   const vgg = new VGG({
-    src: "https://s5.vgg.cool/vgg.daruma",
+    src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma",
     canvas: document.querySelector("#canvas"),
   })
 
@@ -36,7 +36,7 @@ npm install @verygoodgraphics/vgg-wasm
 import { VGG } from "@verygoodgraphics/vgg-wasm"
 
 const vgg = await new VGG({
-  src: "https://s5.vgg.cool/vgg.daruma",
+  src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma",
   canvas: document.querySelector("#canvas") as HTMLCanvasElement,
 }).load()
 
@@ -57,8 +57,9 @@ if (vgg.state === State.Ready) await vgg.render()
 | customFonts          | `string[]`                               | -        | `[]`                               |
 | onLoad               | `EventCallback`                          | -        | -                                  |
 | onLoadError          | `EventCallback`                          | -        | -                                  |
-| onStateChange        | `EventCallback`                          | -        | -                                  |
+| onReady              | `EventCallback`                          | -        | -                                  |
 | onRendered           | `EventCallback`                          | -        | -                                  |
+| onStateChange        | `EventCallback`                          | -        | -                                  |
 | onSelect             | `EventCallback`                          | -        | -                                  |
 | onLoadingStateUpdate | `(state: LoadingState) => void`          | -        | -                                  |
 

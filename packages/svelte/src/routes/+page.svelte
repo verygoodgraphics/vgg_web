@@ -12,8 +12,7 @@
 				</h2>
 			</div>
 			<VGGRender
-				src="https://s3.vgg.cool/test/vgg.daruma"
-				runtime="https://s3.vgg.cool/test/runtime/latest"
+				src="https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma"
 				canvasStyle="width: 100vw; height: 100vh"
 				onLoad={async (event, instance) => {
 					console.log('onLoad', event, instance);
