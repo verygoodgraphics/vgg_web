@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-react
 
+## 0.1.29
+
+### Patch Changes
+
+- update env config
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.25
+
 ## 0.1.28
 
 ### Patch Changes

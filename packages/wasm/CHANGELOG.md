@@ -1,5 +1,11 @@
 # @verygoodgraphics/vgg-wasm
 
+## 0.1.25
+
+### Patch Changes
+
+- update env config
+
 ## 0.1.24
 
 ### Patch Changes
