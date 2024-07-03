@@ -1,5 +1,13 @@
 # @verygoodgraphics/vgg-vue
 
+## 0.1.25
+
+### Patch Changes
+
+- update env config
+- Updated dependencies
+  - @verygoodgraphics/vgg-wasm@0.1.25
+
 ## 0.1.24
 
 ### Patch Changes
