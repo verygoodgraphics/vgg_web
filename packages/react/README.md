@@ -9,7 +9,7 @@ import { VGGRender } from "@verygoodgraphics/vgg-react"
 
 return (
   <VGGRender
-    src="https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma"
+    src="https://raw.githubusercontent.com/verygoodgraphics/vgg_docs/main/static/example/docs__example__vgg_homepage_v1.daruma"
     canvasStyle={{
       width: "50vw",
       height: "100vh",
@@ -29,7 +29,7 @@ return (
 import { useVGG } from "@verygoodgraphics/vgg-react"
 
 const { canvasRef, vgg, isLoading } = useVGG({
-  src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma",
+  src: "https://raw.githubusercontent.com/verygoodgraphics/vgg_docs/main/static/example/docs__example__vgg_homepage_v1.daruma",
 })
 
 useEffect(() => {

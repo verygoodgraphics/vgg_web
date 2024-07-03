@@ -8,7 +8,7 @@
 <script src="https://www.unpkg.com/@verygoodgraphics/vgg-wasm"></script>
 <script>
   const vgg = new VGG({
-    src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma",
+    src: "https://raw.githubusercontent.com/verygoodgraphics/vgg_docs/main/static/example/docs__example__vgg_homepage_v1.daruma",
     canvas: document.querySelector("#canvas"),
   })
 
@@ -36,7 +36,7 @@ npm install @verygoodgraphics/vgg-wasm
 import { VGG } from "@verygoodgraphics/vgg-wasm"
 
 const vgg = await new VGG({
-  src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma",
+  src: "https://raw.githubusercontent.com/verygoodgraphics/vgg_docs/main/static/example/docs__example__vgg_homepage_v1.daruma",
   canvas: document.querySelector("#canvas") as HTMLCanvasElement,
 }).load()
 

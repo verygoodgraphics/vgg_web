@@ -16,7 +16,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 `
 
 const vgg = new VGG({
-  src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma",
+  src: "https://raw.githubusercontent.com/verygoodgraphics/vgg_docs/main/static/example/docs__example__vgg_homepage_v1.daruma",
   runtime: import.meta.env.VGG_RUNTIME,
   // editMode: true,
   verbose: true,

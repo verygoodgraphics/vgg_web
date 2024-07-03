@@ -18,7 +18,7 @@ function handleLoad(event: VGGEvent, instance: VGG<"#vgg_home">) {
 
 <template>
   <VGGRender
-    src="https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma"
+    src="https://raw.githubusercontent.com/verygoodgraphics/vgg_docs/main/static/example/docs__example__vgg_homepage_v1.daruma"
     :canvasStyle="{ width: '50vw', height: '100vh' }"
     @onLoad="handleLoad"
   />
