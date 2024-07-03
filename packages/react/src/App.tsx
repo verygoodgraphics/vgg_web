@@ -8,7 +8,7 @@ import "./App.css"
 
 function App() {
   const { vgg, isRendered } = useVGG({
-    src: "https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma",
+    src: "https://raw.githubusercontent.com/verygoodgraphics/vgg_docs/main/static/example/docs__example__vgg_homepage_v1.daruma",
   })
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function App() {
           </h2>
         </div>
         <VGGRender
-          src="https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma"
+          src="https://raw.githubusercontent.com/verygoodgraphics/vgg_docs/main/static/example/docs__example__vgg_homepage_v1.daruma"
           canvasStyle={{
             width: "50vw",
             height: "100vh",
@@ -50,7 +50,7 @@ function App() {
           </h2>
         </div>
         <VGGRender
-          src="https://raw.githubusercontent.com/verygoodgraphics/resource/main/example/docs__example__vgg_counter.daruma"
+          src="https://raw.githubusercontent.com/verygoodgraphics/vgg_docs/main/static/example/docs__example__vgg_homepage_v1.daruma"
           canvasStyle={{
             width: "50vw",
             height: "100vh",
