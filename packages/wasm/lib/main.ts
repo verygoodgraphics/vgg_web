@@ -47,7 +47,8 @@ export type VGGNode = {
 export class VGG<T extends string> {
   readonly props: VGGProps
 
-  private defaultRuntime: string = import.meta.env.VITE_VGG_RUNTIME
+  private defaultRuntime: string =
+    import.meta.env.VITE_VGG_RUNTIME ?? "https://s5.vgg.cool/runtime/latest"
 
   // Canvas for rendering
   private readonly canvas: HTMLCanvasElement | OffscreenCanvas
@@ -390,7 +391,9 @@ export class VGG<T extends string> {
     this.editMode = opts?.editMode ?? this.editMode
 
     if (!this.vggWasmInstance) {
-      throw new Error("VGG Wasm instance not ready")
+      console.warn("VGG Wasm instance not ready")
+      return
+      // throw new Error("VGG Wasm instance not ready")
     }
 
     const source = darumaSource ?? this.src

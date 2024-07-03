@@ -27,7 +27,7 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 const isLoading = ref(true)
 const vggInstance = ref<VGG<any> | null>(null)
 
-const { src, runtime = import.meta.env.VITE_VGG_RUNTIME, editMode, verbose, customFonts } = defineProps<VGGRenderProps>()
+const { src, runtime, editMode, verbose, customFonts } = defineProps<VGGRenderProps>()
 const emit = defineEmits(['onLoad', 'onLoadError', 'onStateChange', 'onSelect'])
 
 watch(() => src, (newSrc) => {

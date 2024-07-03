@@ -29,7 +29,7 @@ export function VGGRender<T extends string>(props: Props<T>) {
     className,
     src,
     canvasStyle,
-    runtime = import.meta.env.VITE_VGG_RUNTIME,
+    runtime,
     editMode,
     verbose,
     loadingMaskStyle,
